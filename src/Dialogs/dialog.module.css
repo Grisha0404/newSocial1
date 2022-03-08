@@ -1,0 +1,50 @@
+.dialogs{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+}
+
+.inp input{
+    width: 1080px;
+    padding: 0 20px;
+    margin-bottom: 10px;
+    background: #fff9e2;
+    line-height: 30px;
+    border: 1px solid wheat;
+    border-radius: 4px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.inp:focus {
+    outline: wheat;
+}
+
+.like {
+    margin-left: 150px;
+}
+
+.inp button {
+    margin-left: 1050px;
+    background-color: #fff9e2;
+    color: black;
+    padding: 5px 20px;
+    border: 1px solid wheat;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.inp button:hover {
+    background-color: wheat; /* Green */
+    color: white;
+}
+
+.str {
+    padding: 20px;
+    margin-left: 50px;
+}
+
+.message img {
+    height: 40px;
+    width: 40px;
+}
