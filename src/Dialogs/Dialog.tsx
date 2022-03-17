@@ -10,7 +10,6 @@ export const Dialog = (props: DialogType) => {
     return (
         <div>
             {props.message}
-
         </div>
 
     );
