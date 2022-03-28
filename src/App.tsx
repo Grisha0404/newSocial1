@@ -24,11 +24,10 @@ const App: React.FC<AppType> = (props) => {
                 <div className={'Content'}>
                     <Routes>
                         <Route path='/profile'
-                               element={<Profile posts={state.profilePage.posts}
+                               element={<Profile dispatch={store.dispatch.bind(store)} posts={state.profilePage.posts}
                                                  newPostText={state.profilePage.newPostText}/>}/>
                         <Route path='/dialogs'
-                               element={<Dialogs dispatch={store.dispatch.bind(store)}
-                                                 dialogs={state.messagesPage.dialogs}
+                               element={<Dialogs dispatch={store.dispatch.bind(store)} dialogs={state.messagesPage.dialogs}
                                                  messages={state.messagesPage.messages}/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/music' element={<Music/>}/>
