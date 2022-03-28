@@ -28,15 +28,13 @@ export type RootStateType = {
 }
 export type StateType = {
     _state: RootStateType,
-    addNewPost: (title: string) => void
-    addNewMessage: (title: string) => void
-    newFriend: (title: string) => void
     _onChange: () => void
     subscribe: (callback: () => void) => void
     getState: () => RootStateType
     dispatch: (action: ActionType) => void
 }
-export type ActionType = AddActionType | ChangeNewTextActionType | NewMessageActionType
+export type ActionType =  AddActionType | ChangeNewTextActionType | NewMessageActionType
+
 type AddActionType = {
     type: 'Add-post'
     newPostText: string
@@ -90,29 +88,6 @@ const store: StateType = {
             ]
         },
     },
-    addNewPost(title: string) {
-        const newPost: PostType = {
-            id: v1(),
-            message: title,
-            likesCounts: 0
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._onChange()
-    },
-    addNewMessage(title: string) {
-        let messageNew: MessagesType = {id: v1(), message: title}
-        this._state.messagesPage.messages.push(messageNew)
-        this._onChange()
-    },
-    newFriend(title: string) {
-        let friendNew: DialogsType = {
-            id: v1(),
-            name: title,
-            ava: 'http://proshloe.com/wp-content/uploads/2019/07/avatar_l.png'
-        }
-        this._state.messagesPage.dialogs.push(friendNew)
-        this._onChange()
-    },
     _onChange() {
         console.log('State changed')
     },
@@ -123,13 +98,16 @@ const store: StateType = {
         return this._state
     },
     dispatch(action) {
+        //this._state.profilePage = profilePageReducer(this._state.profilePage, action)
+        //this._state.messagesPage = messagesPageReducer(this._state.messagesPage, action)
+
         if (action.type === 'Add-post') {
             const newPost: PostType = {
                 id: v1(),
                 message: action.newPostText,
                 likesCounts: 0
             }
-            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.posts.unshift(newPost)
             this._onChange()
         } else if (action.type === 'add-new-friend') {
             let friendNew: DialogsType = {
