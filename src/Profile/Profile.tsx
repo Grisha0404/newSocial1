@@ -1,15 +1,23 @@
 import React from 'react';
 import {NewPost} from "./NewPost";
 import {Post} from "./Post";
-import store, {ProfilePageType} from "../state/state";
+import store, {ActionType, PostType, ProfilePageType} from "../state/state";
 import {Info} from "./Info";
 import {Image} from "./Image";
 import s from "./post.module.css";
+import {addPostAC, propfilePageReducer} from "../reducer/profilePage-reducer";
 
-type ProfileType = ProfilePageType
+type ProfileType = {
+    posts: Array<PostType>
+    newPostText: string
+    dispatch: (action: ActionType) => void
+}
 
 export const Profile = (props: ProfileType) => {
+    const addNewPost = (title: string) => {
+        props.dispatch({type: 'Add-post', newPostText: title})
 
+    }
     return (
         <div className={'profile'}>
             <Image/>
@@ -18,7 +26,7 @@ export const Profile = (props: ProfileType) => {
                 My Posts
             </div>
             <div className={s.inp}>
-                <NewPost dispatch={store.dispatch.bind(store)} callBack={(title) => store.addNewPost(title)}
+                <NewPost callBack={addNewPost}
                          name={'Add post'}/>
             </div>
             <div>
