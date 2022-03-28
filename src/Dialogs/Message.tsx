@@ -13,15 +13,9 @@ type MessageType = {
 
 export const Message = (props: MessageType) => {
     let [collapsed, setCollapsed] = useState(false)
-    // let [message, setMessage] = useState<Array<MessagesType>>([
-    //     {id: v1(), message: 'Hi'},
-    //     {id: v1(), message: 'How are you?'},
-    //     {id: v1(), message: 'Yo'},
-    //     {id: v1(), message: 'Yo'}
-    // ])
+
     const addNewMessage = (title: string) => {
-        //let messageNew: MessagesType = {id: v1(), message: title}
-        //setMessage([ ...message, messageNew])
+
         props.dispatch({type: 'add-message', title: title})
     }
     return (
@@ -33,8 +27,7 @@ export const Message = (props: MessageType) => {
                     {store._state.messagesPage.messages.map(el => <Dialog key={el.id} id={el.id}
                                                                           message={el.message}/>)}
                     <div className={d.inp}>
-                        <NewPost dispatch={store.dispatch.bind(store)} callBack={(title) => store.addNewMessage(title)}
-                                 name={'Send'}/>
+                        <NewPost  callBack={addNewMessage} name={'Send'}/>
                     </div>
                 </div>
             }
