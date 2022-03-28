@@ -8,13 +8,14 @@ import {Dialogs} from "./Dialogs/Dialogs";
 import {News} from "./News/News";
 import {Settings} from "./Settings/Settings";
 import {Music} from "./Music/Music";
-import {RootStateType} from "./state/state";
+import store, {StateType} from "./state/state";
 
-type AppType= {
-    state: RootStateType
+type AppType = {
+    store: StateType
 }
 
-function App(props:AppType) {
+const App: React.FC<AppType> = (props) => {
+    const state = props.store.getState()
     return (
         <BrowserRouter>
             <div className="App">
@@ -23,9 +24,12 @@ function App(props:AppType) {
                 <div className={'Content'}>
                     <Routes>
                         <Route path='/profile'
-                               element={<Profile posts={props.state.profilePage.posts} newPostText={props.state.profilePage.newPostText}/>}/>
+                               element={<Profile posts={state.profilePage.posts}
+                                                 newPostText={state.profilePage.newPostText}/>}/>
                         <Route path='/dialogs'
-                               element={<Dialogs dialogs={props.state.messagesPage.dialogs} messages={props.state.messagesPage.messages}/>}/>
+                               element={<Dialogs dispatch={store.dispatch.bind(store)}
+                                                 dialogs={state.messagesPage.dialogs}
+                                                 messages={state.messagesPage.messages}/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/settings' element={<Settings/>}/>
