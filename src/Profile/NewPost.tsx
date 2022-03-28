@@ -1,11 +1,9 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import s from './post.module.css'
-import {ActionType} from "../state/state";
+
 
 type NewPostType = {
     callBack: (title: string) => void
     name: string
-    dispatch: (action: ActionType) => void
 }
 
 export const NewPost = (props: NewPostType) => {
@@ -21,8 +19,6 @@ export const NewPost = (props: NewPostType) => {
             setError("Pleas, into you post!")
         } else {
             props.callBack(title)
-            //props.dispatch({type: 'add-message', title:title})
-            console.log(title)
         }
         setTitle('')
     }
