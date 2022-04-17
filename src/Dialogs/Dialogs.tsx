@@ -1,28 +1,25 @@
 import React from 'react';
-import {Message} from "./Message";
 import d from './dialog.module.css'
-import store, {ActionType, DialogsType, MessagesType} from "../state/state";
+import {MessagesPageType} from "../Reducer/dialogsPageReducer";
 import {NewPost} from "../Profile/NewPost";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../Redux/redux-store";
+import {addFriendAC} from "../Reducer/dialogsPageReducer";
+import {Dialog} from "./Dialog";
 
-
-type DialogType = {
-    dialogs: Array<DialogsType>
-    messages: Array<MessagesType>
-    dispatch: (action: ActionType) => void
-}
-
-
-export const Dialogs = (props: DialogType) => {
+export const Dialogs = () => {
+    const dialogs = useSelector<AppRootStateType, MessagesPageType>(state => state.dialogsPage)
+    const dispatch = useDispatch()
     const addFriend = (title: string) => {
-        props.dispatch({type: 'add-new-friend', title})
+        dispatch(addFriendAC(title))
     }
 
     return (
         <div className={d.dialogs}>
             <NewPost callBack={addFriend}
                      name={'add friends'}/>
-            {props.dialogs.map(el => <Message key={el.id} dispatch={store.dispatch.bind(store)} ava={el.ava}
-                                              name={el.name} id={el.id}/>)}
+            {dialogs.dialogs.map(el => <Dialog id={el.id} key={el.id} ava={el.ava}
+                                               name={el.name}/>)}
 
         </div>
     );
