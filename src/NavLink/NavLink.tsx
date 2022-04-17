@@ -4,6 +4,7 @@ import {NavLink} from "react-router-dom";
 export const NavBar = () => {
     return (
         <div className={'NavLin'}>
+            <div className={'NavLinContainer'}>
             <div>
                 <NavLink to='/profile'>Profile</NavLink>
             </div>
@@ -18,6 +19,7 @@ export const NavBar = () => {
             </div>
             <div>
                 <NavLink to='/settings'>Settings</NavLink>
+            </div>
             </div>
         </div>
     );
