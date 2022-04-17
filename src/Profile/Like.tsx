@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import s from './post.module.css'
 
-type LikeType = {}
+type LikeType = {
+    likesCounts: number
+}
 
 export const Like = (props: LikeType) => {
-    let [like, setLike] = useState(0)
+    let [like, setLike] = useState(props.likesCounts)
 
     const addLike = () => {
         setLike(like++)
