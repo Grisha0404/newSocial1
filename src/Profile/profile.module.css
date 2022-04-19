@@ -1,0 +1,14 @@
+.inp input{
+
+    width: 1080px;
+    padding: 0 20px;
+    margin-bottom: 10px;
+    background: #E9EFF6;
+    line-height: 30px;
+    border: 1px solid lightblue;
+    border-radius: 8px;
+    font-family: 'Roboto', sans-serif;
+}
+.inp:focus{
+    outline: none;
+}
