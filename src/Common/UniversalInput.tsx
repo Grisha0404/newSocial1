@@ -1,12 +1,13 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, memo, useState} from 'react';
 
 
 type NewPostType = {
-    callBack: (title: string) => void
+    callback: (title: string) => void,
     name: string
 }
 
-export const NewPost = (props: NewPostType) => {
+export const UniversalInput = memo((props: NewPostType) => {
+
     let [title, setTitle] = useState('')
     let [error, setError] = useState('')
 
@@ -18,13 +19,18 @@ export const NewPost = (props: NewPostType) => {
         if (title.trim() === '') {
             setError("Pleas, into you post!")
         } else {
-            props.callBack(title)
+            props.callback(title)
         }
         setTitle('')
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            addNewPosts();
+            if (title.trim() === '') {
+                setError("Pleas, into you post!")
+            } else {
+                props.callback(title)
+            }
+            setTitle('')
         }
     }
 
@@ -38,4 +44,4 @@ export const NewPost = (props: NewPostType) => {
             </div>
         </div>
     );
-};
+});
