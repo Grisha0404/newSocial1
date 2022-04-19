@@ -1,26 +1,22 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import d from './dialog.module.css'
-import {MessagesPageType} from "../Reducer/dialogsPageReducer";
-import {NewPost} from "../Profile/NewPost";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../Redux/redux-store";
+import {UniversalInput} from "../Common/UniversalInput";
+import {useDispatch} from "react-redux";
 import {addFriendAC} from "../Reducer/dialogsPageReducer";
-import {Dialog} from "./Dialog";
+import {DialogsContainer} from "./DialogsContainer/DialogsContainer";
 
 export const Dialogs = () => {
-    const dialogs = useSelector<AppRootStateType, MessagesPageType>(state => state.dialogsPage)
+
     const dispatch = useDispatch()
-    const addFriend = (title: string) => {
+
+    const addFriend = useCallback((title: string) => {
         dispatch(addFriendAC(title))
-    }
+    }, [dispatch])
 
     return (
         <div className={d.dialogs}>
-            <NewPost callBack={addFriend}
-                     name={'add friends'}/>
-            {dialogs.dialogs.map(el => <Dialog id={el.id} key={el.id} ava={el.ava}
-                                               name={el.name}/>)}
-
+            <UniversalInput callback={addFriend} name={'add friends'}/>
+            <DialogsContainer/>
         </div>
     );
 };
