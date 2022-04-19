@@ -1,0 +1,32 @@
+
+.like{
+margin-left: 150px;
+}
+.like button{
+    border: 1px solid lightblue;
+    border-radius: 50%;
+    background: #E9EFF6;
+}
+.like button:hover {
+    background-color: #8ebfff; /* Green */
+    color: white;
+}
+.inp button:hover {
+    background-color: #8ebfff; /* Green */
+    color: white;
+}
+
+.inp button{
+    margin-left: 1030px;
+    background-color: #E9EFF6;
+    color: black;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.post img{
+    height: 40px;
+    width: 40px;
+}
