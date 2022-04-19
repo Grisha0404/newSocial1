@@ -13,7 +13,6 @@ import {Music} from "./Music/Music";
 const App = () => {
 
     return (
-
         <div className="App">
             <Header/>
             <NavBar/>
