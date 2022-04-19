@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {memo} from 'react';
 import s from './post.module.css'
-import {Like} from "./Like";
+import {Like} from "../../../Common/Like";
 
 export type PostType = {
     id: string
@@ -8,7 +8,7 @@ export type PostType = {
     likesCounts: number
 }
 
-export const Post = (props: PostType) => {
+export const Post = memo((props: PostType) => {
     return (
         <div className={s.post}>
             <img
@@ -16,4 +16,4 @@ export const Post = (props: PostType) => {
             <span>{props.message}<Like likesCounts={props.likesCounts}/></span>
         </div>
     );
-};
+});
