@@ -1,19 +1,28 @@
-.dialogs{
-
+.message{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    text-align: end;
+    margin-right: 100px;
+}
+.messageContainer{
+    width: 800px;
+    border-left: 1px solid cornflowerblue;
+    margin-left: 200px;
 }
 .inp input{
-    width: 1080px;
+    width: 700px;
     padding: 0 20px;
     margin-bottom: 10px;
-    background: #fff9e2;
+    background: #c8e7ff;
     line-height: 30px;
-    border: 1px solid wheat;
+    border: 1px solid cornflowerblue;
     border-radius: 4px;
     font-family: 'Roboto', sans-serif;
 }
 
 .inp:focus {
-    outline: wheat;
+    outline: #c8e7ff;
 }
 
 .like {
@@ -21,17 +30,15 @@
 }
 
 .inp button {
-    margin-left: 1050px;
-    background-color: #fff9e2;
+    background-color: #c8e7ff;
     color: black;
     padding: 5px 20px;
-    border: 1px solid wheat;
+    border: 1px solid cornflowerblue;
     border-radius: 2px;
     cursor: pointer;
 }
 
-.inp button:hover {
-    background-color: wheat; /* Green */
+.inp button:hover {/* Green */
     color: white;
 }
 
