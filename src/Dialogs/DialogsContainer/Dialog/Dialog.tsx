@@ -14,11 +14,8 @@ export const Dialog = memo((props: DialogsType) => {
 
     return (
         <div className={d.message}>
-            //сделать через ссылку
-            {/*<NavLink to="/newMessenge"><img*/}
-            {/*    src={props.ava}/>{props.name}</NavLink>*/}
-            <button style={{border: 'none', backgroundColor: 'white'}} onClick={() => setCollapsed(!collapsed)}><img
-                src={props.ava}/> {props.name}</button>
+            <span style={{border: 'none', backgroundColor: 'white'}} onClick={() => setCollapsed(!collapsed)}><img
+                src={props.ava}/> {props.name}</span>
             {collapsed &&
                 <MessageContainer/>
             }
