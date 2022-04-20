@@ -16,7 +16,7 @@ export const MessageContainer = () => {
     }, [dispatch])
 
     return (
-        <div>
+        <div className={d.messageContainer}>
             {messages.messages.map(el => <Message key={el.id} id={el.id} message={el.message}/>)}
             <div className={d.inp}>
                 <UniversalInput callback={addNewMessage} name={'Send'}/>
