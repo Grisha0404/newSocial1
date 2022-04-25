@@ -1,11 +1,13 @@
 import {combineReducers, createStore} from "redux";
 import {profilePageReducer} from "../Reducer/profilePageReducer";
 import {dialogsPageReducer} from "../Reducer/dialogsPageReducer";
+import {usersReducer} from "../Reducer/usersReducer";
 
 
 let rootReducer = combineReducers({//сюда поместим все редьюсеры
     profilePage: profilePageReducer,
-    dialogsPage: dialogsPageReducer
+    dialogsPage: dialogsPageReducer,
+    users: usersReducer
 });
 
 // определить автоматически тип всего объекта состояния
