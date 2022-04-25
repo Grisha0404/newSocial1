@@ -8,6 +8,7 @@ import {Dialogs} from "./Dialogs/Dialogs";
 import {News} from "./News/News";
 import {Settings} from "./Settings/Settings";
 import {Music} from "./Music/Music";
+import {Friends} from "./Friends/Friends";
 
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
                         <Route path='/news' element={<News/>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/settings' element={<Settings/>}/>
+                        <Route path='/friends' element={<Friends />}/>
                     </Routes>
             </div>
         </div>
