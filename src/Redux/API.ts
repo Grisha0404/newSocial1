@@ -12,8 +12,6 @@ const API = {
     usersFriends: () => {
         const query = `/api/1.0/users`;
         return axiosInstance.get<{}, TestType<ItemsType>>(query);
-
-        //return axiosInstance.get(query).then(res => res.data);<{}, TestType<ItemsType>>
     }
 };
 
@@ -24,7 +22,7 @@ type TestType<T> = {
 export type ItemsType = {
     items: Array<UsersType>,
     totalCount?: number,
-    error: SetStateAction<UsersType[] | undefined>,
+    error: SetStateAction<string>,
 }
 
 
