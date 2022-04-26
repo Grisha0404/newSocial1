@@ -1,6 +1,6 @@
 import axios from 'axios';
-import {UsersType} from "../Friends/Friends";
 import {SetStateAction} from "react";
+import {UsersType} from "../Reducer/usersReducer";
 
 const configOMB = {
     baseURL: 'https://social-network.samuraijs.com',
