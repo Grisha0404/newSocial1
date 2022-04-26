@@ -1,26 +1,45 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../Redux/redux-store";
+import API from "../Redux/API";
+import {followAC, setUsersAC, UsersType} from "../Reducer/usersReducer";
 
-type UsersContainerType={
-    name: string,
-    status: string,
-    followed: boolean,
-    largePhotos: string,
-    smallPhotos:string
-}
+export const UsersContainer = () => {
+    const users = useSelector<AppRootStateType, UsersType[]>(state => state.users.users)
+    const dispatch = useDispatch();
 
-export const UsersContainer = (props:UsersContainerType) => {
-
-    const [follow, setFollow] = useState<boolean>(props.followed)
-    const clickHandler = () => {
-      setFollow(!follow)
+    const clickHandler = (follow: boolean, userId: number) => {
+        dispatch(followAC(follow, userId))
     }
+    useEffect(() => {
+        const usersContainer = async () => {
+            try {
+                const {data} = await API.usersFriends();
+                const {items, error} = data;
+                error ? dispatch(setUsersAC(error)) : dispatch(setUsersAC(items))
+            } catch (err) {
+                console.log('err ', err);
+            }
+        }
+        setTimeout(() => {
+            usersContainer()
+        }, 100)
+    }, [dispatch])
 
     return (
         <div>
-            <img src={props.smallPhotos} alt={'not photo'}/>
-            <div>{props.name}</div>
-            <span>{props.status}</span>
-            <button onClick={clickHandler}>{follow ? 'UNFOLLOW': "FOLLOW"}</button>
+            {
+                users.map(u =>
+                    <div key={u.id}>
+                        <img src={u.photos.small} alt={'not photo'}/>
+                        <div>{u.name}</div>
+                        <span>{u.status}</span>
+                        <button
+                            onClick={() => clickHandler(u.followed, u.id)}>{u.followed ? "FOLLOW" : 'UNFOLLOW'}</button>
+                    </div>
+                )
+            }
+
         </div>
     );
 };
