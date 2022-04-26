@@ -10,16 +10,22 @@ export type UsersType = {
 }
 
 export type InitialType = {
-    users: UsersType[]
+    users: UsersType[],
+    pagesSize: number,
+    totalCount: number,
+    currentPage: number,
 }
-const initialState: InitialType = {
+const initialState = {
     users: [
         // {id:1, name: 'Viktor',photos:{ small: 'not', large:"NOT"}, status: 'HI, HOW ARE YOU', followed: false}
-    ]
+    ],
+    pagesSize: 2,
+    totalCount:30,
+    currentPage: 5,
 }
 
 
-export const usersReducer = (state = initialState, action: UsersActionsType) => {
+export const usersReducer = (state:InitialType = initialState, action: UsersActionsType): InitialType=> {
     switch (action.type) {
         case "SET-USERS":
             return {...state, users: [...action.items]}
