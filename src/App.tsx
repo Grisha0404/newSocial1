@@ -8,7 +8,7 @@ import {Dialogs} from "./Dialogs/Dialogs";
 import {News} from "./News/News";
 import {Settings} from "./Settings/Settings";
 import {Music} from "./Music/Music";
-import {Friends} from "./Friends/Friends";
+import {UsersContainer} from "./Friends/UsersContainer";
 
 
 const App = () => {
@@ -18,16 +18,16 @@ const App = () => {
             <Header/>
             <NavBar/>
             <div className={'Content'}>
-                    <Routes>
-                        <Route path='/profile'
-                               element={<Profile/>}/>
-                        <Route path='/dialogs'
-                               element={<Dialogs/>}/>
-                        <Route path='/news' element={<News/>}/>
-                        <Route path='/music' element={<Music/>}/>
-                        <Route path='/settings' element={<Settings/>}/>
-                        <Route path='/friends' element={<Friends />}/>
-                    </Routes>
+                <Routes>
+                    <Route path='/profile'
+                           element={<Profile/>}/>
+                    <Route path='/dialogs'
+                           element={<Dialogs/>}/>
+                    <Route path='/news' element={<News/>}/>
+                    <Route path='/music' element={<Music/>}/>
+                    <Route path='/settings' element={<Settings/>}/>
+                    <Route path='/friends' element={<UsersContainer/>}/>
+                </Routes>
             </div>
         </div>
     );
