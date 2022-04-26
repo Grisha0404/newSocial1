@@ -9,8 +9,8 @@ const key = '22986';
 const axiosInstance = axios.create(configOMB);
 
 const API = {
-    usersFriends: () => {
-        const query = `/api/1.0/users`;
+    usersFriends: (currentPage:number, count:number) => {
+        const query = `/api/1.0/users?page=${currentPage}&count${count}`;
         return axiosInstance.get<{}, TestType<ItemsType>>(query);
     }
 };
