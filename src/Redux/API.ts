@@ -22,7 +22,7 @@ type TestType<T> = {
 export type ItemsType = {
     items: Array<UsersType>,
     totalCount?: number,
-    error: SetStateAction<string>,
+    error: SetStateAction<any>,
 }
 
 
