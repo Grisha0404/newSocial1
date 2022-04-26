@@ -12,6 +12,7 @@ export const UsersContainer = () => {
     const clickHandler = (follow: boolean, userId: number) => {
         dispatch(followAC(follow, userId))
     }
+
     useEffect(() => {
         const usersContainer = async () => {
             try {
