@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../Redux/redux-store";
 import API from "../Redux/API";
 import {followAC, setUsersAC, UsersType} from "../Reducer/usersReducer";
+import userPhoto from '../Common/image/userPhoto.png'
 
 export const UsersContainer = () => {
     const users = useSelector<AppRootStateType, UsersType[]>(state => state.users.users)
@@ -21,9 +22,7 @@ export const UsersContainer = () => {
                 console.log('err ', err);
             }
         }
-        setTimeout(() => {
-            usersContainer()
-        }, 100)
+        usersContainer()
     }, [dispatch])
 
     return (
@@ -31,7 +30,8 @@ export const UsersContainer = () => {
             {
                 users.map(u =>
                     <div key={u.id}>
-                        <img src={u.photos.small} alt={'not photo'}/>
+                        <img src={u.photos.small !== null ? u.photos.small : userPhoto} alt={'not photo'}
+                             style={{width: "40px", height: "50px"}}/>
                         <div>{u.name}</div>
                         <span>{u.status}</span>
                         <button
