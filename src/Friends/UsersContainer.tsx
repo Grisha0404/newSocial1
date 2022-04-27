@@ -1,16 +1,16 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../Redux/redux-store";
 import API from "../Redux/API";
-import {followAC, setUsersAC, UsersType} from "../Reducer/usersReducer";
+import {followAC, setSelectorAC, setUsersAC, UsersType} from "../Reducer/usersReducer";
 import userPhoto from '../Common/image/userPhoto.png'
 import s from './users.module.css'
 
 export const UsersContainer = () => {
     const users = useSelector<AppRootStateType, UsersType[]>(state => state.users.users)
-    const totalCount = useSelector<AppRootStateType, number>(state => state.users.totalCount)
     const pageSize = useSelector<AppRootStateType, number>(state => state.users.pagesSize)
     const currentPage = useSelector<AppRootStateType, number>(state => state.users.currentPage)
+    const [totalCount, setTotalCount] = useState<number>(1)
 
     const dispatch = useDispatch();
 
@@ -23,24 +23,31 @@ export const UsersContainer = () => {
             try {
                 const {data} = await API.usersFriends(pageCount, pageSize);
                 const {items, error, totalCount} = data;
+                console.log(data)
+                setTotalCount(totalCount)
                 error ? dispatch(setUsersAC(error)) : dispatch(setUsersAC(items))
             } catch (err) {
                 console.log('err ', err);
             }
         }
         usersContainer()
-    }, [dispatch])
+    }, [dispatch, currentPage])
+    console.log(currentPage)
 
     let pageCount = Math.ceil(totalCount / pageSize);
     let pages = [];
     for (let i = 1; i <= pageCount; i++) {
         pages.push(i)
     }
+    const setSelectorClick = (page: number) => {
+      dispatch(setSelectorAC(page))
+    }
 
     return (
         <div>
             <div>
-                <span>{pages.map((p,index) => <span key={index} className={`${currentPage === p && s.selectedPages}` }> {p} </span>)}</span>
+                <span>{pages.map((p, index) => <span key={index} onClick={()=>setSelectorClick(p)}
+                                                     className={`${currentPage === p && s.selectedPages}`}> {p} </span>)}</span>
             </div>
             {
                 users.map(u =>
