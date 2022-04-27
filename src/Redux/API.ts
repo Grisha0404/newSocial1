@@ -9,8 +9,8 @@ const key = '22986';
 const axiosInstance = axios.create(configOMB);
 
 const API = {
-    usersFriends: (currentPage:number, count:number) => {
-        const query = `/api/1.0/users?page=${currentPage}&count${count}`;
+    usersFriends: (currentPage: number, count: number) => {
+        const query = `/api/1.0/users?page=${currentPage}&count=${count}`;
         return axiosInstance.get<{}, TestType<ItemsType>>(query);
     }
 };
@@ -21,7 +21,7 @@ type TestType<T> = {
 
 export type ItemsType = {
     items: Array<UsersType>,
-    totalCount?: number,
+    totalCount: number,
     error: SetStateAction<any>,
 }
 
