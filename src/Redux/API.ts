@@ -5,7 +5,7 @@ import {UsersType} from "../Reducer/usersReducer";
 const configOMB = {
     baseURL: 'https://social-network.samuraijs.com',
 };
-const key = '22986';
+//const key = '22986';
 const axiosInstance = axios.create(configOMB);
 
 const API = {
@@ -13,6 +13,7 @@ const API = {
         const query = `/api/1.0/users?page=${currentPage}&count=${count}`;
         return axiosInstance.get<{}, TestType<ItemsType>>(query);
     }
+
 };
 
 type TestType<T> = {
