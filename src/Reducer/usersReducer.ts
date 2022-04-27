@@ -12,16 +12,14 @@ export type UsersType = {
 export type InitialType = {
     users: UsersType[],
     pagesSize: number,
-    totalCount: number,
     currentPage: number,
 }
 const initialState = {
     users: [
         // {id:1, name: 'Viktor',photos:{ small: 'not', large:"NOT"}, status: 'HI, HOW ARE YOU', followed: false}
     ],
-    pagesSize: 2,
-    totalCount:30,
-    currentPage: 5,
+    pagesSize: 20,
+    currentPage: 1,
 }
 
 
@@ -34,14 +32,17 @@ export const usersReducer = (state:InitialType = initialState, action: UsersActi
                 ...state,
                 users: state.users.map(f => f.id === action.userId ? {...f, followed: !action.follow} : f)
             }
+        case "SET-SELECTOR":
+            return {...state, currentPage: action.page}
         default:
             return state;
     }
 };
-export type UsersActionsType = SetUsersACType | FollowACType
+export type UsersActionsType = SetUsersACType | FollowACType | SetSelectorACType
 
 type SetUsersACType = ReturnType<typeof setUsersAC>
 type FollowACType = ReturnType<typeof followAC>
+type SetSelectorACType = ReturnType<typeof setSelectorAC>
 
 export const setUsersAC = (items: UsersType[]) => {
     return {
@@ -54,6 +55,12 @@ export const followAC = (follow: boolean, userId: number) => {
         type: 'SET-FOLLOWS',
         follow: follow,
         userId: userId
+    } as const
+}
+export const setSelectorAC = (page: number) => {
+    return {
+        type: 'SET-SELECTOR',
+        page: page
     } as const
 }
 
