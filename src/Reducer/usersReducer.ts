@@ -11,19 +11,19 @@ export type UsersType = {
 
 export type InitialType = {
     users: UsersType[],
-    pagesSize: number,
     currentPage: number,
+    totalCount: number,
 }
 const initialState = {
     users: [
         // {id:1, name: 'Viktor',photos:{ small: 'not', large:"NOT"}, status: 'HI, HOW ARE YOU', followed: false}
     ],
-    pagesSize: 20,
     currentPage: 1,
+    totalCount: 0
 }
 
 
-export const usersReducer = (state:InitialType = initialState, action: UsersActionsType): InitialType=> {
+export const usersReducer = (state: InitialType = initialState, action: UsersActionsType): InitialType => {
     switch (action.type) {
         case "SET-USERS":
             return {...state, users: [...action.items]}
@@ -34,15 +34,18 @@ export const usersReducer = (state:InitialType = initialState, action: UsersActi
             }
         case "SET-SELECTOR":
             return {...state, currentPage: action.page}
+        case "GET-TOTAL":
+            return {...state, totalCount: action.totalCount}
         default:
             return state;
     }
 };
-export type UsersActionsType = SetUsersACType | FollowACType | SetSelectorACType
+export type UsersActionsType = SetUsersACType | FollowACType | SetSelectorACType | GetTotalCountACType
 
 type SetUsersACType = ReturnType<typeof setUsersAC>
 type FollowACType = ReturnType<typeof followAC>
 type SetSelectorACType = ReturnType<typeof setSelectorAC>
+type GetTotalCountACType = ReturnType<typeof getTotalCountAC>
 
 export const setUsersAC = (items: UsersType[]) => {
     return {
@@ -61,6 +64,12 @@ export const setSelectorAC = (page: number) => {
     return {
         type: 'SET-SELECTOR',
         page: page
+    } as const
+}
+export const getTotalCountAC = (totalCount: number) => {
+    return {
+        type: 'GET-TOTAL',
+        totalCount: totalCount
     } as const
 }
 
