@@ -13,13 +13,15 @@ export type InitialType = {
     users: UsersType[],
     currentPage: number,
     totalCount: number,
+    fetch: boolean
 }
 const initialState = {
     users: [
         // {id:1, name: 'Viktor',photos:{ small: 'not', large:"NOT"}, status: 'HI, HOW ARE YOU', followed: false}
     ],
     currentPage: 1,
-    totalCount: 0
+    totalCount: 0,
+    fetch: false,
 }
 
 
@@ -36,16 +38,24 @@ export const usersReducer = (state: InitialType = initialState, action: UsersAct
             return {...state, currentPage: action.page}
         case "GET-TOTAL":
             return {...state, totalCount: action.totalCount}
+        case "GET-FETCHING":
+            return {...state, fetch: action.fetch}
         default:
             return state;
     }
 };
-export type UsersActionsType = SetUsersACType | FollowACType | SetSelectorACType | GetTotalCountACType
+export type UsersActionsType =
+    SetUsersACType
+    | FollowACType
+    | SetSelectorACType
+    | GetTotalCountACType
+    | GetFetchingACType
 
 type SetUsersACType = ReturnType<typeof setUsersAC>
 type FollowACType = ReturnType<typeof followAC>
 type SetSelectorACType = ReturnType<typeof setSelectorAC>
 type GetTotalCountACType = ReturnType<typeof getTotalCountAC>
+type GetFetchingACType = ReturnType<typeof getFetchingAC>
 
 export const setUsersAC = (items: UsersType[]) => {
     return {
@@ -70,6 +80,12 @@ export const getTotalCountAC = (totalCount: number) => {
     return {
         type: 'GET-TOTAL',
         totalCount: totalCount
+    } as const
+}
+export const getFetchingAC = (fetch: boolean) => {
+    return {
+        type: 'GET-FETCHING',
+        fetch: fetch
     } as const
 }
 
