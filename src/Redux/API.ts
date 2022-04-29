@@ -12,6 +12,10 @@ const API = {
     usersFriends: (currentPage: number) => {
         const query = `/api/1.0/users?page=${currentPage}&count=15`;
         return axiosInstance.get<{}, TestType<ItemsType>>(query);
+    },
+    usersProfile: ()=>{
+        const query = `/api/1.0/profile/2`;
+        return axiosInstance.get<{}, TestType<UsersProfileType>>(query);
     }
 
 };
@@ -19,7 +23,27 @@ const API = {
 type TestType<T> = {
     data: T
 }
-
+export type UsersProfileType = {
+    aboutMe: string,
+    contacts: {
+        facebook: string,
+        website: string,
+        vk: string,
+        twitter: string,
+        instagram: string,
+        youtube: string,
+        github: string,
+        mainLink: string
+    },
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    userId: number,
+    photos: {
+        small: string,
+        large: string,
+    },
+}
 export type ItemsType = {
     items: Array<UsersType>,
     totalCount: number,
