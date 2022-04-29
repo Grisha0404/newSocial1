@@ -14,22 +14,22 @@ export const UsersContainer = () => {
     const totalCount = useSelector<AppRootStateType, number>(state => state.users.totalCount)
     //выбраная страница
     const currentPage = useSelector<AppRootStateType, number>(state => state.users.currentPage)
+    //loading
     const isFetching = useSelector<AppRootStateType, boolean>(state => state.users.fetch)
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         const usersContainer = async () => {
+            dispatch(getFetchingAC(false))
             try {
                 const {data} = await API.usersFriends(currentPage);
                 const {items, error, totalCount} = data;
-                dispatch(getFetchingAC(false))
+                dispatch(getFetchingAC(true))
                 dispatch(getTotalCountAC(totalCount))
                 error ? dispatch(setUsersAC(error)) : dispatch(setUsersAC(items))
             } catch (err) {
                 console.log('err ', err);
-            } finally {
-                dispatch(getFetchingAC(true))
             }
 
         }
