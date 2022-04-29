@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../Redux/redux-store";
 import API from "../Redux/API";
-import {followAC, getTotalCountAC, setSelectorAC, setUsersAC, UsersType} from "../Reducer/usersReducer";
+import {followAC, getFetchingAC, getTotalCountAC, setSelectorAC, setUsersAC, UsersType} from "../Reducer/usersReducer";
 import {User} from "./User";
 import {Selector} from "./Selector";
 import style from './users.module.css'
-import loadingImg from '../Common/image/loading__.gif'
+import {IsFetching} from "../Common/IsFeatching";
 
 export const UsersContainer = () => {
     const users = useSelector<AppRootStateType, UsersType[]>(state => state.users.users)
@@ -14,7 +14,8 @@ export const UsersContainer = () => {
     const totalCount = useSelector<AppRootStateType, number>(state => state.users.totalCount)
     //выбраная страница
     const currentPage = useSelector<AppRootStateType, number>(state => state.users.currentPage)
-    const [loading, setLoading] = useState(false)
+    const isFetching = useSelector<AppRootStateType, boolean>(state => state.users.fetch)
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -22,12 +23,13 @@ export const UsersContainer = () => {
             try {
                 const {data} = await API.usersFriends(currentPage);
                 const {items, error, totalCount} = data;
+                dispatch(getFetchingAC(false))
                 dispatch(getTotalCountAC(totalCount))
                 error ? dispatch(setUsersAC(error)) : dispatch(setUsersAC(items))
             } catch (err) {
                 console.log('err ', err);
             } finally {
-                console.log("FIN")
+                dispatch(getFetchingAC(true))
             }
 
         }
@@ -45,14 +47,16 @@ export const UsersContainer = () => {
 
     return (
         <div className={style.usersContainer}>
-            loading ?
-            <User users={users} callBack={clickHandler}/>
+            {isFetching ?
+                <>
+                    <User users={users} callBack={clickHandler}/>
+                </>
+
+                :
+                <IsFetching/>
+            }
             <Selector callBack={setSelectorClick} currentPage={currentPage}
                       totalCount={totalCount}/>
-            :
-            <div>
-                <img src={loadingImg}/>
-            </div>
         </div>
     );
 };
