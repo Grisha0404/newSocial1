@@ -1,6 +1,7 @@
 import React from 'react';
 import userPhoto from "../Common/image/userPhoto.png";
 import {UsersType} from "../Reducer/usersReducer";
+import style from './users.module.css'
 
 type UserType = {
     users: UsersType[]
@@ -10,7 +11,7 @@ type UserType = {
 
 export const User: React.FC<UserType> = ({users, callBack}) => {
     return (
-        <div>
+        <div className={style.users}>
             {
                 users.map(u =>
                     <div key={u.id}>
