@@ -11,6 +11,15 @@ import {Music} from "./Music/Music";
 import {UsersContainer} from "./Friends/UsersContainer";
 
 
+export const PATH = {
+    PROFILE: '/profile',
+    DIALOGS: '/dialogs',
+    NEWS: '/news',
+    MUSIC: '/music',
+    SETTINGS: '/settings',
+    FRIENDS: '/friends',
+}
+
 const App = () => {
 
     return (
@@ -19,14 +28,14 @@ const App = () => {
             <NavBar/>
             <div className={'Content'}>
                 <Routes>
-                    <Route path='/profile'
+                    <Route path={PATH.PROFILE}
                            element={<Profile/>}/>
-                    <Route path='/dialogs'
+                    <Route path={PATH.DIALOGS}
                            element={<Dialogs/>}/>
-                    <Route path='/news' element={<News/>}/>
-                    <Route path='/music' element={<Music/>}/>
-                    <Route path='/settings' element={<Settings/>}/>
-                    <Route path='/friends' element={<UsersContainer/>}/>
+                    <Route path={PATH.NEWS} element={<News/>}/>
+                    <Route path={PATH.MUSIC} element={<Music/>}/>
+                    <Route path={PATH.SETTINGS} element={<Settings/>}/>
+                    <Route path={PATH.FRIENDS} element={<UsersContainer/>}/>
                 </Routes>
             </div>
         </div>
