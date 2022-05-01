@@ -19,7 +19,7 @@ export const InfoProfile = () => {
             }
         }
         usersProfile()
-    });
+    },[dispatch]);
 
     return (
         <div>
