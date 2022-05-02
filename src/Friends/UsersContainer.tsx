@@ -31,7 +31,6 @@ export const UsersContainer = () => {
             } catch (err) {
                 console.log('err ', err);
             }
-
         }
 
         usersContainer()
@@ -53,7 +52,7 @@ export const UsersContainer = () => {
                 </>
 
                 :
-                <IsFetching/>
+                <IsFetching width={'900px'} height={'650px'}/>
             }
             <Selector callBack={setSelectorClick} currentPage={currentPage}
                       totalCount={totalCount}/>
