@@ -12,7 +12,7 @@ import {UsersContainer} from "./Friends/UsersContainer";
 
 
 export const PATH = {
-    PROFILE: '/profile',
+    PROFILE: '/profile/:id',
     DIALOGS: '/dialogs',
     NEWS: '/news',
     MUSIC: '/music',
