@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {SetStateAction} from "react";
 import {UsersType} from "../Reducer/usersReducer";
+import {PATH} from "../App";
 
 const configOMB = {
     baseURL: 'https://social-network.samuraijs.com',
@@ -13,8 +14,8 @@ const API = {
         const query = `/api/1.0/users?page=${currentPage}&count=15`;
         return axiosInstance.get<{}, TestType<ItemsType>>(query);
     },
-    usersProfile: ()=>{
-        const query = `/api/1.0/profile/2`;
+    usersProfile: (id:any)=>{
+        const query = `/api/1.0/profile/` + id;
         return axiosInstance.get<{}, TestType<UsersProfileType>>(query);
     }
 
