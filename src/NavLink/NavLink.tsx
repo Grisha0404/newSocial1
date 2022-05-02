@@ -6,7 +6,7 @@ export const NavBar = () => {
         <div className={'NavLin'}>
             <div className={'NavLinContainer'}>
                 <div>
-                    <NavLink to='/profile'>Profile</NavLink>
+                    <NavLink to='/profile/:id'>Profile</NavLink>
                 </div>
                 <div>
                     <NavLink to='/dialogs'>Dialogs</NavLink>
