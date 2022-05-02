@@ -1,10 +1,15 @@
 import React from 'react';
 import loadingImg from "./image/Curve-Loading.gif";
-import style from './fetch.module.css'
 
-export const IsFetching = () => {
+type IsFetchingType = {
+    width: string
+    height: string
+}
+
+
+export const IsFetching:React.FC<IsFetchingType> = ({width,height}) => {
     return (
-            <div className={style.Fetch}>
+            <div style={{width:width, height: height}}>
                 <img src={loadingImg} />
             </div>
     );
