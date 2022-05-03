@@ -1,5 +1,5 @@
 import React from 'react';
-import {LoginContainer} from "./LoginUser/LoginContainer";
+import {LoginContainer} from "../Login/LoginUser/LoginContainer";
 
 export const Header = () => {
     return (
