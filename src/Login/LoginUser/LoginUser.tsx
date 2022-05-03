@@ -5,12 +5,13 @@ import {DataInitialType} from "../../Reducer/authUsersReducer";
 
 
 export const LoginUser: React.FC<DataInitialType> = ({login, email}) => {
+
     return (
         <div className={style.loginUser}>
             <img src={ava} alt={'Photo'}/>
             <div className={style.loginInfo}>
                 <div>{login}</div>
-                <div>{email}</div>
+                <div className={style.block}>{email}</div>
             </div>
         </div>
     );
