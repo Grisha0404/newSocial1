@@ -1,0 +1,49 @@
+.loginPage{
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: center;
+}
+
+
+.loginLink{
+    float: right;
+}
+.loginBlock{
+    display: flex;
+    width: 100px;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 60px;
+    align-items: center;
+}
+
+.loginUser {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.loginUser img {
+    width: 60px;
+}
+.loginInfo {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.block {
+    display:none;
+    background-color: #c8e7ff;
+    height:25px;
+    -moz-box-shadow:0 5px 5px rgba(0,0,0,0.3);
+    -webkit-box-shadow:0 5px 5px rgba(0,0,0,0.3);
+    box-shadow:0 5px 5px rgba(0,0,0,0.3);
+}
+.loginUser:hover .block{
+    display:block;
+    position: center;
+}
