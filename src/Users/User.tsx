@@ -17,8 +17,8 @@ export const User: React.FC<UserType> = ({users, callBack}) => {
                 users.map(u =>
                     <div key={u.id}>
                         <NavLink to={'/profile/' + u.id}>
-                        <img src={u.photos.small !== null ? u.photos.small : userPhoto} alt={'not photo'}
-                             style={{width: "60px", height: "70px"}}/>
+                            <img src={u.photos.small !== null ? u.photos.small : userPhoto} alt={'not photo'}
+                                 style={{width: "60px", height: "70px"}}/>
                         </NavLink>
                         <div>{u.name}</div>
                         <div>{u.status}</div>
