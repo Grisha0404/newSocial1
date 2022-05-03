@@ -9,6 +9,7 @@ import {News} from "./News/News";
 import {Settings} from "./Settings/Settings";
 import {Music} from "./Music/Music";
 import {UsersContainer} from "./Users/UsersContainer";
+import {LoginPage} from "./Login/LoginPage";
 
 
 export const PATH = {
@@ -18,6 +19,7 @@ export const PATH = {
     MUSIC: '/music',
     SETTINGS: '/settings',
     FRIENDS: '/friends',
+    LOGIN: '/login',
 }
 
 const App = () => {
@@ -36,6 +38,7 @@ const App = () => {
                     <Route path={PATH.MUSIC} element={<Music/>}/>
                     <Route path={PATH.SETTINGS} element={<Settings/>}/>
                     <Route path={PATH.FRIENDS} element={<UsersContainer/>}/>
+                    <Route path={PATH.LOGIN} element={<LoginPage/>}/>
                 </Routes>
             </div>
         </div>
