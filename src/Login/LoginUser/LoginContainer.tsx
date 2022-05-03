@@ -26,8 +26,8 @@ export const LoginContainer = () => {
     return (
         <div className={style.loginLink}>
             {authUser.id === null ?
-                <div>
-                    <NavLink to={'/login'}>Login</NavLink>
+                <div className={style.loginBlock}>
+                    <NavLink to={'/login'} >Login</NavLink>
                 </div>
                 :
                 <LoginUser login={authUser.login} email={authUser.email}/>
