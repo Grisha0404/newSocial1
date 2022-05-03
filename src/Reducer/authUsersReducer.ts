@@ -1,5 +1,5 @@
 export type DataInitialType = {
-    id: number | null,
+    id?: number | null,
     login: string | null,
     email: string | null,
 }
@@ -14,7 +14,7 @@ const initialState = {
 export const authUsersReducer = (state: DataInitialType = initialState, action: LoginActionsType) => {
     switch (action.type) {
         case "SET-LOGIN-USERS":
-            debugger
+
             return {...state, ...action.data}
         default:
             return state;
