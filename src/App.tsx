@@ -8,7 +8,7 @@ import {Dialogs} from "./Dialogs/Dialogs";
 import {News} from "./News/News";
 import {Settings} from "./Settings/Settings";
 import {Music} from "./Music/Music";
-import {UsersContainer} from "./Friends/UsersContainer";
+import {UsersContainer} from "./Users/UsersContainer";
 
 
 export const PATH = {
