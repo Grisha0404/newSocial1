@@ -29,13 +29,12 @@ export const InfoProfile = () => {
         usersProfile()
     }, [dispatch]);
 
+    let fetchingParams = isFetching ? <InfoUser profile={profile}/> : <IsFetching width={'300px'} height={'200px'}/>
+    let pageProfiler = params.id === ':id' ? 'Yo, men! Here could be your profile!' : fetchingParams
+
     return (
         <div>
-            {isFetching ?
-                <InfoUser profile={profile}/>
-                :
-                <IsFetching width={'300px'} height={'200px'}/>
-            }
+            {pageProfiler}
             <div style={{textAlign: 'left', padding: '20px'}}>
                 My Posts
             </div>
