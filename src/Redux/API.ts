@@ -6,7 +6,7 @@ import {DataInitialType} from "../Reducer/authUsersReducer";
 const axiosInstance = axios.create({
     baseURL: 'https://social-network.samuraijs.com',
     withCredentials: true,
-    headers:{
+    headers: {
         'API-KEY': 'ec9357aa-327b-4213-99ec-0ffb01e452b5',
     }
 });
