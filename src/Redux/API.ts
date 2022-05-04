@@ -5,24 +5,32 @@ import {DataInitialType} from "../Reducer/authUsersReducer";
 
 const axiosInstance = axios.create({
     baseURL: 'https://social-network.samuraijs.com',
-    // withCredentials: true,
-    // headers: {
-    //     'API-KEY': 'ec9357aa-327b-4213-99ec-0ffb01e452b5',
-    // }
+    withCredentials: true,
+    headers: {
+        'API-KEY': 'ec9357aa-327b-4213-99ec-0ffb01e452b5',
+    }
 });
 
 const API = {
     usersFriends: (currentPage: number) => {
-        const query = `/api/1.0/users?page=${currentPage}&count=15`;
+        const query = `/api/1.0/users?page=${currentPage}&count=10`;
         return axiosInstance.get<{}, TestType<ItemsType>>(query);
     },
-    usersProfile: (id: any) => {
+    usersProfile: (id: string | undefined) => {
         const query = `/api/1.0/profile/` + id;
         return axiosInstance.get<{}, TestType<UsersProfileType>>(query);
     },
     authUser: () => {
         const query = `/api/1.0/auth/me`;
         return axiosInstance.get<{}, TestType<AuthUserType>>(query);
+    },
+    followUsers: (id: number) => {
+        const query = `/api/1.0/follow/` + id;
+        return axiosInstance.post<{}, TestType<FollowUserType>>(query);
+    },
+    unFollowUsers: (id: number) => {
+        const query = `/api/1.0/follow/` + id;
+        return axiosInstance.delete<{}, TestType<FollowUserType>>(query);
     }
 
 };
@@ -30,6 +38,12 @@ const API = {
 type TestType<T> = {
     data: T
 }
+export type FollowUserType = {
+    resultCode: number
+    messages: [],
+    data: {}
+}
+
 export  type AuthUserType = {
     data: DataInitialType,
     messages: [],
