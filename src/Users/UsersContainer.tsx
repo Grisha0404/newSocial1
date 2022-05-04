@@ -29,18 +29,29 @@ export const UsersContainer = () => {
                 dispatch(getTotalCountAC(totalCount))
                 error ? dispatch(setUsersAC(error)) : dispatch(setUsersAC(items))
             } catch (err) {
-                console.log('err ', err);
+                console.log('err usersContainer', err);
             }
         }
-
         usersContainer()
+
     }, [dispatch, currentPage])
 
 
     const setSelectorClick = (page: number) => {
         dispatch(setSelectorAC(page))
     }
-    const clickHandler = (follow: boolean, userId: number) => {
+    const clickFollowHandler = (follow: boolean, userId: number) => {
+        const followUsers = async () => {
+            try {
+                follow ?
+                    await API.unFollowUsers(userId)
+                    :
+                    await API.followUsers(userId)
+            } catch (err) {
+                console.log('err followUsers', err)
+            }
+        }
+        followUsers()
         dispatch(followAC(follow, userId))
     }
 
@@ -48,7 +59,7 @@ export const UsersContainer = () => {
         <div className={style.usersContainer}>
             {isFetching ?
                 <>
-                    <User users={users} callBack={clickHandler}/>
+                    <User users={users} callBack={clickFollowHandler}/>
                 </>
 
                 :
