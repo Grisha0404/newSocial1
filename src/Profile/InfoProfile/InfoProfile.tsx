@@ -23,7 +23,7 @@ export const InfoProfile = () => {
                 dispatch(getFetchingAC(true))
                 dispatch(getUsersProfileAC(data))
             } catch (err) {
-                console.log('err ', err);
+                console.log('err usersProfile', err);
             }
         }
         usersProfile()
