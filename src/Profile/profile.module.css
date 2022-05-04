@@ -1,13 +1,26 @@
 .inp input{
-
-    width: 1080px;
+    margin-right: 20px;
+    margin-left: 50px;
+    width: 60%;
     padding: 0 20px;
     margin-bottom: 10px;
-    background: #E9EFF6;
+    background: #c8e7ff;
     line-height: 30px;
-    border: 1px solid lightblue;
+    border: 1px solid cornflowerblue;
     border-radius: 8px;
     font-family: 'Roboto', sans-serif;
+}
+.inp button {
+    background-color: #c8e7ff;
+    color: black;
+    padding: 5px 20px;
+    border: 1px solid cornflowerblue;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.inp button:hover {/* Green */
+    color: white;
 }
 .inp:focus{
     outline: none;
