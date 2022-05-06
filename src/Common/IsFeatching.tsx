@@ -9,7 +9,7 @@ type IsFetchingType = {
 
 export const IsFetching:React.FC<IsFetchingType> = ({width,height}) => {
     return (
-            <div style={{width:width, height: height}}>
+            <div style={{width:width, height: height}} >
                 <img src={loadingImg} />
             </div>
     );
