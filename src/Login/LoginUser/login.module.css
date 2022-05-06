@@ -1,17 +1,32 @@
-.loginPage{
+.loginPage {
     display: flex;
     height: 100vh;
-    flex-direction: column;
     flex-wrap: wrap;
     align-content: space-around;
     justify-content: center;
+    align-items: center;
+}
+
+.loginContainer {
+    display: flex;
+    width: 40%;
+    height: 70%;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    background: #1a358c0f; /* Цвет фона */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Параметры тени */
+    padding: 10px;
 }
 
 
-.loginLink{
+.loginLink {
     float: right;
 }
-.loginBlock{
+
+.loginBlock {
     display: flex;
     width: 100px;
     flex-wrap: wrap;
@@ -26,24 +41,28 @@
     flex-direction: row;
     justify-content: flex-end;
 }
+
 .loginUser img {
     width: 60px;
 }
+
 .loginInfo {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
+
 .block {
-    display:none;
+    display: none;
     background-color: #c8e7ff;
-    height:25px;
-    -moz-box-shadow:0 5px 5px rgba(0,0,0,0.3);
-    -webkit-box-shadow:0 5px 5px rgba(0,0,0,0.3);
-    box-shadow:0 5px 5px rgba(0,0,0,0.3);
+    height: 25px;
+    -moz-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
 }
-.loginUser:hover .block{
-    display:block;
+
+.loginUser:hover .block {
+    display: block;
     position: center;
 }
