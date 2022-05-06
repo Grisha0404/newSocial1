@@ -1,9 +1,8 @@
 import React, {useEffect} from 'react';
-import API from "../../Redux/API";
 import {NavLink} from "react-router-dom";
 import style from './login.module.css'
 import {useDispatch, useSelector} from "react-redux";
-import {DataInitialType, setLoginUsersAC} from "../../Reducer/authUsersReducer";
+import {DataInitialType, getLoginAuthUserTC} from "../../Reducer/authUsersReducer";
 import {AppRootStateType} from "../../Redux/redux-store";
 import {LoginUser} from "./LoginUser";
 
@@ -12,15 +11,7 @@ export const LoginContainer = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        const login = async () => {
-            try {
-                const {data} = await API.authUser()
-                dispatch(setLoginUsersAC(data.data))
-            } catch (error) {
-                alert('Please, login!')
-            }
-        }
-        login()
+        dispatch(getLoginAuthUserTC())
     }, [dispatch])
 
     return (
@@ -30,7 +21,7 @@ export const LoginContainer = () => {
                     <NavLink to={'/login'} >Login</NavLink>
                 </div>
                 :
-                <LoginUser login={authUser.login} email={authUser.email}/>
+                <LoginUser login={authUser.login} email={authUser.email} id={authUser.id}/>
             }
         </div>
     );
