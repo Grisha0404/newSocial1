@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {ActionType, AppRootStateType, DispatchType} from "../Redux/redux-store";
 import {
-    followUserTC, getUsersTC,
+    followUserTC, getFetchingAC, getUsersTC,
     setSelectorAC,
     UsersType
 } from "../Reducer/usersReducer";
@@ -22,6 +22,7 @@ export const UsersContainer = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        dispatch(getFetchingAC(false))
         dispatch(getUsersTC(currentPage))
     }, [dispatch, currentPage])
 
