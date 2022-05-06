@@ -15,7 +15,7 @@ export const Profile = () => {
     }
 
     return (
-        <div className={'profile'}>
+        <div className={s.profile}>
             <InfoProfile/>
             <div className={s.inp}>
                 <UniversalInput callback={addPost} name={'Add post'}/>
