@@ -1,3 +1,8 @@
+import {Dispatch} from "redux";
+import API from "../Redux/API";
+import {ActionType, AppRootStateType, DispatchType} from "../Redux/redux-store";
+import {ThunkAction} from "redux-thunk";
+
 export type UsersType = {
     id: number,
     name: string,
@@ -89,3 +94,24 @@ export const getFetchingAC = (fetch: boolean) => {
     } as const
 }
 
+type ThunkType = ThunkAction<void, AppRootStateType, unknown, ActionType>
+
+export const getUsersTC = (currentPage: number) => (dispatch: DispatchType) => {
+    API.usersFriends(currentPage).then((res) => {
+        dispatch(setUsersAC(res.data.items))
+    })
+        .catch((err) => {
+            console.log('error get Users ', err)
+        })
+}
+export const followUserTC = (follow: boolean, id: number) => (dispatch: Dispatch): void => {
+    if(follow){
+        debugger
+        API.followUsers(id).then((res) => {
+            dispatch(followAC(follow, id))
+        })
+    }else {
+        API.unFollowUsers(id)
+        dispatch(followAC(follow, id))
+    }
+}
