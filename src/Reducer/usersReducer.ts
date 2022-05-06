@@ -94,24 +94,26 @@ export const getFetchingAC = (fetch: boolean) => {
     } as const
 }
 
-type ThunkType = ThunkAction<void, AppRootStateType, unknown, ActionType>
-
 export const getUsersTC = (currentPage: number) => (dispatch: DispatchType) => {
     API.usersFriends(currentPage).then((res) => {
+        dispatch(getFetchingAC(false))
         dispatch(setUsersAC(res.data.items))
     })
         .catch((err) => {
-            console.log('error get Users ', err)
+            dispatch(getFetchingAC(false))
+            console.log('Error with get users ', err)
         })
 }
 export const followUserTC = (follow: boolean, id: number) => (dispatch: Dispatch): void => {
-    if(follow){
-        debugger
-        API.followUsers(id).then((res) => {
-            dispatch(followAC(follow, id))
+    if (follow) {
+        API.unFollowUsers(id).catch((err) => {
+            console.log('Error with unFollow user ', err)
         })
-    }else {
-        API.unFollowUsers(id)
+        dispatch(followAC(follow, id))
+    } else {
+        API.followUsers(id).catch((err) => {
+            console.log('Error with follow user ', err)
+        })
         dispatch(followAC(follow, id))
     }
 }
