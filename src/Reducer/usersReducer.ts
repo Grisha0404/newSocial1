@@ -1,25 +1,6 @@
-import {Dispatch} from "redux";
 import API from "../Redux/API";
-import {ActionType, AppRootStateType, DispatchType} from "../Redux/redux-store";
-import {ThunkAction} from "redux-thunk";
+import {AppThunk} from "../Redux/redux-store";
 
-export type UsersType = {
-    id: number,
-    name: string,
-    photos: {
-        small: string,
-        large: string,
-    }
-    status: string,
-    followed: boolean
-}
-
-export type InitialType = {
-    users: UsersType[],
-    currentPage: number,
-    totalCount: number,
-    fetch: boolean
-}
 const initialState = {
     users: [
         // {id:1, name: 'Viktor',photos:{ small: 'not', large:"NOT"}, status: 'HI, HOW ARE YOU', followed: false}
@@ -28,8 +9,6 @@ const initialState = {
     totalCount: 0,
     fetch: false,
 }
-
-
 export const usersReducer = (state: InitialType = initialState, action: UsersActionsType): InitialType => {
     switch (action.type) {
         case "SET-USERS":
@@ -49,62 +28,22 @@ export const usersReducer = (state: InitialType = initialState, action: UsersAct
             return state;
     }
 };
-export type UsersActionsType =
-    SetUsersACType
-    | FollowACType
-    | SetSelectorACType
-    | GetTotalCountACType
-    | GetFetchingACType
-
-type SetUsersACType = ReturnType<typeof setUsersAC>
-type FollowACType = ReturnType<typeof followAC>
-type SetSelectorACType = ReturnType<typeof setSelectorAC>
-type GetTotalCountACType = ReturnType<typeof getTotalCountAC>
-type GetFetchingACType = ReturnType<typeof getFetchingAC>
-
-export const setUsersAC = (items: UsersType[]) => {
-    return {
-        type: 'SET-USERS',
-        items: items
-    } as const
-}
-export const followAC = (follow: boolean, userId: number) => {
-    return {
-        type: 'SET-FOLLOWS',
-        follow: follow,
-        userId: userId
-    } as const
-}
-export const setSelectorAC = (page: number) => {
-    return {
-        type: 'SET-SELECTOR',
-        page: page
-    } as const
-}
-export const getTotalCountAC = (totalCount: number) => {
-    return {
-        type: 'GET-TOTAL',
-        totalCount: totalCount
-    } as const
-}
-export const getFetchingAC = (fetch: boolean) => {
-    return {
-        type: 'GET-FETCHING',
-        fetch: fetch
-    } as const
-}
-
-export const getUsersTC = (currentPage: number) => (dispatch: DispatchType) => {
-    API.usersFriends(currentPage).then((res) => {
-        dispatch(getFetchingAC(false))
+export const setUsersAC = (items: UsersType[]) => ({type: 'SET-USERS', items} as const)
+export const followAC = (follow: boolean, userId: number) => ({type: 'SET-FOLLOWS', follow, userId} as const)
+export const setSelectorAC = (page: number) => ({type: 'SET-SELECTOR', page} as const)
+export const getTotalCountAC = (totalCount: number) => ({type: 'GET-TOTAL', totalCount} as const)
+export const getFetchingAC = (fetch: boolean) => ({type: 'GET-FETCHING', fetch} as const)
+export const getUsersTC = (currentPage: number): AppThunk => async dispatch => {
+    try {
+        const res = await API.usersFriends(currentPage)
+        dispatch(getFetchingAC(true))
         dispatch(setUsersAC(res.data.items))
-    })
-        .catch((err) => {
-            dispatch(getFetchingAC(false))
-            console.log('Error with get users ', err)
-        })
+    } catch (err) {
+        dispatch(getFetchingAC(false))
+        console.log('Error with get users ', err)
+    }
 }
-export const followUserTC = (follow: boolean, id: number) => (dispatch: Dispatch): void => {
+export const followUserTC = (follow: boolean, id: number): AppThunk => (dispatch) => {
     if (follow) {
         API.unFollowUsers(id).catch((err) => {
             console.log('Error with unFollow user ', err)
@@ -116,4 +55,33 @@ export const followUserTC = (follow: boolean, id: number) => (dispatch: Dispatch
         })
         dispatch(followAC(follow, id))
     }
+}
+
+//Type
+export type UsersActionsType =
+    SetUsersACType
+    | FollowACType
+    | SetSelectorACType
+    | GetTotalCountACType
+    | GetFetchingACType
+type SetUsersACType = ReturnType<typeof setUsersAC>
+type FollowACType = ReturnType<typeof followAC>
+type SetSelectorACType = ReturnType<typeof setSelectorAC>
+type GetTotalCountACType = ReturnType<typeof getTotalCountAC>
+type GetFetchingACType = ReturnType<typeof getFetchingAC>
+export type UsersType = {
+    id: number,
+    name: string,
+    photos: {
+        small: string,
+        large: string,
+    }
+    status: string,
+    followed: boolean
+}
+export type InitialType = {
+    users: UsersType[],
+    currentPage: number,
+    totalCount: number,
+    fetch: boolean
 }
