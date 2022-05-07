@@ -1,13 +1,10 @@
 import React, {useState} from 'react';
 import style from "./users.module.css";
-
-
 type SelectorType = {
     totalCount: number,
     callBack: (page: number) => void,
     currentPage: number,
 }
-
 export const Selector: React.FC<SelectorType> = ({totalCount, callBack, currentPage}) => {
 
     const [startPages, setSmallPages] = useState(1)
@@ -29,10 +26,10 @@ export const Selector: React.FC<SelectorType> = ({totalCount, callBack, currentP
 
     return (
         <div className={style.selectorContainer}>
-            <button onClick={clickHandlerMin} disabled={startPages<=1}>⟪⟪⟪</button>
-            <button className={style.selector} >{pages.map((p, index) => <span key={index} onClick={() => callBack(p)}
-                                                 className={`${currentPage === p && style.selectedPages}`}> {p} </span>)}</button>
-            <button onClick={clickHandlerPlus} disabled={endPages>pageCount}>⟫⟫⟫</button>
+            <button onClick={clickHandlerMin} disabled={startPages <= 1}>⟪⟪⟪</button>
+            <button className={style.selector}>{pages.map((p, index) => <span key={index} onClick={() => callBack(p)}
+                                                                              className={`${currentPage === p && style.selectedPages}`}> {p} </span>)}</button>
+            <button onClick={clickHandlerPlus} disabled={endPages > pageCount}>⟫⟫⟫</button>
         </div>
     );
 };
