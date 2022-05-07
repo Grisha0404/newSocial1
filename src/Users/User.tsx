@@ -9,7 +9,6 @@ type UserType = {
     callBack: (follow: boolean, userId: number) => void
 }
 
-
 export const User: React.FC<UserType> = ({users, callBack}) => {
     return (
         <div className={style.users}>
