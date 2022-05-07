@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import {InfoUser} from "../InfoUser";
 import API, {UsersProfileType} from "../../Redux/API";
 import {useDispatch, useSelector} from "react-redux";
-import {getUserProfile, getUsersProfileAC} from "../../Reducer/profilePageReducer";
+import {currentProfileTC, getUserProfile, getUsersProfileAC} from "../../Reducer/profilePageReducer";
 import {AppRootStateType} from "../../Redux/redux-store";
 import {useParams} from "react-router-dom";
 import {IsFetching} from "../../Common/IsFeatching";
@@ -16,6 +16,7 @@ export const InfoProfile = () => {
     const params = useParams()
 
     useEffect(() => {
+        dispatch(currentProfileTC())
         dispatch(getFetchingAC(false))
         dispatch(getUserProfile(params.id))
     }, [dispatch]);
