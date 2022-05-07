@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {ActionType, AppRootStateType, DispatchType} from "../Redux/redux-store";
+import {AppRootStateType} from "../Redux/redux-store";
 import {
     followUserTC, getFetchingAC, getUsersTC,
     setSelectorAC,
@@ -25,7 +25,6 @@ export const UsersContainer = () => {
         dispatch(getFetchingAC(false))
         dispatch(getUsersTC(currentPage))
     }, [dispatch, currentPage])
-
 
     const setSelectorClick = (page: number) => {
         dispatch(setSelectorAC(page))
