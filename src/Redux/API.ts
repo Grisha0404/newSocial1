@@ -31,11 +31,17 @@ const API = {
     unFollowUsers: (id: number) => {
         const query = `/api/1.0/follow/` + id;
         return axiosInstance.delete<{}, TestType<FollowUserType>>(query);
+    },
+    currentProfile:()=>{
+        const query = `/api/1.0/profile`;
+        debugger
+        return axiosInstance.put<{}, TestType<UsersProfileType>>(query)
     }
 
 };
 
-type TestType<T> = {
+//Type
+type TestType<T = {}> = {
     data: T
 }
 export type FollowUserType = {
