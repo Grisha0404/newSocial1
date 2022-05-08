@@ -32,18 +32,21 @@ const API = {
         const query = `/api/1.0/follow/` + id;
         return axiosInstance.delete<{}, TestType<FollowUserType>>(query);
     },
-    currentProfile:()=>{
-        const query = `/api/1.0/profile`;
-        debugger
-        return axiosInstance.put<{}, TestType<UsersProfileType>>(query)
+    getStatusProfile: (id: string | undefined ) => {
+        const query = `/api/1.0/profile/status/` + id;
+        return axiosInstance.get<{}, TestType<string>>(query);
+    },
+    changeStatus: (status: string) => {
+        const query = `/api/1.0/profile/status`;
+        return axiosInstance.put<{ status: string }, TestType<string>>(query, {status});
     }
-
 };
 
 //Type
 type TestType<T = {}> = {
     data: T
 }
+
 export type FollowUserType = {
     resultCode: number
     messages: [],
