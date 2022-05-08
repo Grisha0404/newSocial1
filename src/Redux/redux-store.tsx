@@ -10,7 +10,7 @@ let rootReducer = combineReducers({//сюда поместим все редью
     profilePage: profilePageReducer,
     dialogsPage: dialogsPageReducer,
     users: usersReducer,
-    login: authUsersReducer
+    login: authUsersReducer,
 });
 
 // определить автоматически тип всего объекта состояния
