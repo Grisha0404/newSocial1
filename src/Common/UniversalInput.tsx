@@ -7,7 +7,6 @@ type NewPostType = {
 }
 
 export const UniversalInput = memo((props: NewPostType) => {
-
     let [title, setTitle] = useState('')
     let [error, setError] = useState('')
 
@@ -38,9 +37,9 @@ export const UniversalInput = memo((props: NewPostType) => {
     return (
         <div>
             <div>
-                <input value={title} onKeyPress={onKeyPressHandler} onChange={changeHandler}/>
+                <input value={title} onKeyPress={onKeyPressHandler} onChange={changeHandler} placeholder={'новая публикация...'}/>
                 <span style={{color: 'red'}}>{error}</span>
-                <button onClick={addNewPosts}>{props.name}</button>
+                {/*<button onClick={addNewPosts}>{props.name}</button>*/}
             </div>
         </div>
     );
