@@ -10,7 +10,7 @@ export const Selector: React.FC<SelectorType> = ({totalCount, callBack, currentP
     const [startPages, setSmallPages] = useState(1)
     const [endPages, setEndPages] = useState(20)
 
-    let pageCount = Math.ceil(totalCount / 15);
+    let pageCount = Math.ceil(totalCount / 20);
     let pages = [];
     for (let i = startPages; i <= endPages; i++) {
         pages.push(i)
