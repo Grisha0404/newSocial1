@@ -7,14 +7,13 @@
 
 .selectorContainer button{
     border: none;
-    background: white;
+    background-color: snow;
     font-weight: bold;
     color: cornflowerblue;
-    text-align: center;
-
+    margin-top: 7px;
 }
 .selectorContainer button:disabled{
-    color: white;
+    color: snow;
 }
 .selector{
     color: cornflowerblue;
@@ -33,13 +32,18 @@
     width: 90%;
     text-align: center;
     margin: 0 auto;
+    box-shadow: 2px 1px 4px 0 rgb(52 50 50 / 75%);
+    border-radius: 20px;
+    background-color: snow;
 }
 .users {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    height: 87vh;
-    align-items: center;
-    align-content: space-between;
-    justify-content: space-between;
+    height: 80vh;
+    width: 100%;
+    align-items: stretch;
+    align-content: space-around;
+    justify-content: space-evenly;
+
 }
