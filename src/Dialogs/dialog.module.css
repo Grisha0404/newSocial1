@@ -1,17 +1,37 @@
+.dialogs{
+    text-align: center;
+    box-shadow: 2px 1px 4px 0 rgb(52 50 50 / 75%);
+    border-radius: 20px;
+    background-color: snow;
+}
+.dialogContainer{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    margin-left: 20px;
+    width: 100vh;
+    min-height: 48vh;
+    justify-content: space-evenly;
+}
+
 .message{
     display: flex;
     flex-wrap: nowrap;
     align-items: stretch;
-    text-align: end;
-    margin-right: 100px;
+    justify-content: space-between;
 }
 .messageContainer{
-    width: 800px;
+    width: 70%;
     border-left: 1px solid cornflowerblue;
-    margin-left: 200px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    align-content: center;
 }
 .inp input{
-    width: 700px;
+    width: 60vh;
     padding: 0 20px;
     margin-bottom: 10px;
     background: #c8e7ff;
