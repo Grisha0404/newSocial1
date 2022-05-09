@@ -3,6 +3,7 @@ import {UsersProfileType} from "../../Redux/API";
 import userPhoto from '../../Common/image/userPhoto.png'
 import style from '../profile.module.css'
 import {ContactsProfile} from "./ContactsProfile";
+import {NavLink} from "react-router-dom";
 
 export type InfoUserType = {
     profile: UsersProfileType
