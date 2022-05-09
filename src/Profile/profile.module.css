@@ -5,20 +5,63 @@
     align-content: flex-start;
     justify-content: space-evenly;
 }
-.inp h3{
-    text-align: center;
+.profileContainer{
+    background-color: snow;
+    display: flex;
+    box-shadow: 2px 1px 4px 0 rgb(52 50 50 / 75%);
+    border-radius: 20px;
+    margin: 0 0 20px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
+    align-items: center;
 }
-
+.postContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
+    align-items: stretch;
+    min-height: 75vh;
+}
+.avaInputContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-height: 10vh;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    box-shadow: 2px 1px 4px 0 rgb(52 50 50 / 75%);
+    background-color: snow;
+}
+.postContainer img {
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+}
+.poster{
+    margin-top: 15px;
+    display: flex;
+    background-color: snow;
+    box-shadow: 2px 1px 4px 0 rgb(52 50 50 / 75%);
+    border-radius: 20px;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: baseline;
+    min-height: 20vh;
+    width: 100%;
+    flex-direction: column;
+    align-content: center;
+}
 .inp input{
     margin-right: 20px;
-    margin-left: 50px;
-    width: 60%;
-    padding: 0 20px;
-    margin-bottom: 10px;
-    background: #c8e7ff;
-    line-height: 30px;
-    border: 1px solid cornflowerblue;
-    border-radius: 8px;
+    margin-left: 20px;
+    width: 50vh;
+    background: snow;
+    line-height: 40px;
+    border: 1px solid gray;
+    border-radius: 20px;
     font-family: 'Roboto', sans-serif;
 }
 .inp button {
