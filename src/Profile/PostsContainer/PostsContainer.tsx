@@ -5,8 +5,9 @@ import {AppRootStateType} from "../../Redux/redux-store";
 import {addPostAC, ProfilePageType} from "../../Reducer/profilePageReducer";
 import s from "../profile.module.css";
 import {UniversalInput} from "../../Common/UniversalInput";
+import ava from '../../Common/image/ava.jpeg'
 
-export const PostsContainer= () => {
+export const PostsContainer = () => {
     const profilePage = useSelector<AppRootStateType, ProfilePageType>(state => state.profilePage)
     const dispatch = useDispatch()
 
@@ -15,16 +16,17 @@ export const PostsContainer= () => {
     }
 
     return (
-        <div>
-
-            <div className={s.inp}>
-                <h3>
-                    My Posts
-                </h3>
-                <UniversalInput callback={addPost} name={'Add post'}/>
+        <div className={s.postContainer}>
+            <div className={s.avaInputContainer}>
+                <img src={ava}/>
+                <div className={s.inp}>
+                    <UniversalInput callback={addPost} name={'Add post'}/>
+                </div>
             </div>
-            {profilePage.posts.map(el => <Post key={el.id} id={el.id} message={el.message}
-                                               likesCounts={el.likesCounts}/>)}
+            <div className={s.poster}>
+                {profilePage.posts.map(el => <Post key={el.id} id={el.id} message={el.message}
+                                                   likesCounts={el.likesCounts}/>)}
+            </div>
         </div>
     );
 };
