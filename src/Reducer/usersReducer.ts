@@ -36,6 +36,7 @@ export const getFetchingAC = (fetch: boolean) => ({type: 'GET-FETCHING', fetch} 
 export const getUsersTC = (currentPage: number): AppThunk => async dispatch => {
     try {
         const res = await API.usersFriends(currentPage)
+        dispatch(getTotalCountAC(res.data.totalCount))
         dispatch(getFetchingAC(true))
         dispatch(setUsersAC(res.data.items))
     } catch (err) {
