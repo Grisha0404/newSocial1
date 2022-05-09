@@ -3,9 +3,9 @@
 margin-left: 150px;
 }
 .like button{
-    border: 1px solid lightblue;
+    box-shadow: 2px 1px 4px 0 rgb(52 50 50 / 75%);
+    border: 1px solid #d4d7db;
     border-radius: 50%;
-    background: #E9EFF6;
 }
 .like button:hover {
     background-color: #8ebfff; /* Green */
