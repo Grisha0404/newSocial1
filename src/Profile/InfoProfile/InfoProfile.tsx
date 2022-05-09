@@ -8,6 +8,7 @@ import {IsFetching} from "../../Common/IsFeatching";
 import {getFetchingAC} from "../../Reducer/usersReducer";
 import {StatusProfile} from "./StatusProfile/StatusProfile";
 import {getStatusProfile, getUserProfileTC} from "../../Reducer/profilePageReducer";
+import s from '../profile.module.css'
 
 export const InfoProfile = () => {
     const profile = useSelector<AppRootStateType, UsersProfileType>(state => state.profilePage.profile)
@@ -25,7 +26,7 @@ export const InfoProfile = () => {
     let fetchingParams = isFetching ? <InfoUser profile={profile}/> : <IsFetching width={'300px'} height={'200px'}/>
 
     return (
-        <div>
+        <div className={s.profileContainer}>
             {params.id === ':id' ? 'Yo, men! Here could be your profile!' : fetchingParams}
             <StatusProfile/>
         </div>
