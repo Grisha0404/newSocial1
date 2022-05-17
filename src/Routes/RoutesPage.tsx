@@ -22,6 +22,7 @@ export const RoutesPage = () => {
     return (
         <div className={'Content'}>
             <Routes>
+                <Route path={'/'} element={<Profile/>}/>
                 <Route path={PATH.PROFILE}
                        element={<Profile/>}/>
                 <Route path={PATH.DIALOGS}
