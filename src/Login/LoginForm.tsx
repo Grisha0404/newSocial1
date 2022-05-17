@@ -1,76 +1,63 @@
 import React from 'react';
-import {withFormik, FormikProps, FormikErrors, Form, Field} from 'formik';
+import {useFormik} from 'formik';
+import {useDispatch, useSelector} from "react-redux";
+import {loginTC} from "../Reducer/authUsersReducer";
+import {AppRootStateType} from "../Redux/redux-store";
 
 // Shape of form values
 interface FormValues {
     email: string;
     password: string;
-}
-
-interface OtherProps {
-
+    rememberMe?: boolean
 }
 
 // Aside: You may see InjectedFormikProps<OtherProps, FormValues> instead of what comes below in older code.. InjectedFormikProps was artifact of when Formik only exported a HoC. It is also less flexible as it MUST wrap all props (it passes them through).
-const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
-    const {touched, errors, isSubmitting} = props;
+export const InnerForm = () => {
+    const status = useSelector<AppRootStateType, string>(state => state.app.status)
+    const dispatch = useDispatch()
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+            rememberMe: false
+        },
+        // validate: (values: FormValues) => {
+        //     let errors: FormikErrors<FormValues> = {};
+        //     if (!values.email) {
+        //         errors.email = 'Required';
+        //     } else if (!values.email) {
+        //         errors.email = 'Invalid email address';
+        //     }
+        //     return errors;
+        // },
+        onSubmit: values => {
+            const {email, password, rememberMe} = values
+            dispatch(loginTC(email, password, rememberMe))
+        }
+    })
+
+
     return (
-        <Form>
+        <form onSubmit={formik.handleSubmit}>
             <div>
-                <Field type="email" name="email"/>
-                {touched.email && errors.email && <div>{errors.email}</div>}
+                <input type="email" name="email" onChange={formik.handleChange}
+                       value={formik.values.email} placeholder={'Email'}/>
+                {/*{touched.email && errors.email && <div>{errors.email}</div>}*/}
             </div>
             <div>
-                <Field type="password" name="password"/>
-                {touched.password && errors.password && <div>{errors.password}</div>}
+                <input type="password" name="password" onChange={formik.handleChange}
+                       value={formik.values.password} placeholder={'password'}/>
+                {/*{touched.password && errors.password && <div>{errors.password}</div>}*/}
             </div>
             <div>
-                <Field type='checkbox' name='remember me'/>remember me
+                <input type='checkbox' name='rememberMe' onChange={formik.handleChange} style={{width:'50px'}}/>remember me
             </div>
-            <button type="submit" disabled={isSubmitting}>
+            <button type="submit"
+                disabled={status === 'loading'} >
                 Sign IN
             </button>
-        </Form>
+        </form>
     );
 };
 
-// The type of props MyForm receives
-interface MyFormProps {
-    initialEmail?: string;
-    // if this passed all the way through you might do this or make a union type
-}
 
-// Wrap our form with the withFormik HoC
-const MyForm = withFormik<MyFormProps, FormValues>({
-    // Transform outer props into form values
-    mapPropsToValues: props => {
-        return {
-            email: props.initialEmail || '',
-            password: '',
-        };
-    },
-
-    // Add a custom validation function (this can be async too!)
-    validate: (values: FormValues) => {
-        let errors: FormikErrors<FormValues> = {};
-        if (!values.email) {
-            errors.email = 'Required';
-        } else if (!values.email) {
-            errors.email = 'Invalid email address';
-        }
-        return errors;
-    },
-
-    handleSubmit: values => {
-        // do submitting things
-        console.log(values)
-    },
-})(InnerForm);
-
-const Login = () => (
-    <div>
-        <MyForm/>
-    </div>
-);
-
-export default Login;
