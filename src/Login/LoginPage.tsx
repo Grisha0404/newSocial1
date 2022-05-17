@@ -1,15 +1,10 @@
 import React from 'react';
 import style from './LoginUser/login.module.css';
 import {AuthWithOtherSocial} from "./AuthWithOtherSocial";
-import Login from "./LoginForm";
+import {InnerForm} from "./LoginForm";
 
 
 export const LoginPage = () => {
-    // const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
-    //
-    // const onSubmit = (formData: FormDataType) => {
-    //     console.log(formData)
-    // }
     return (
         <div className={style.loginPage}>
             <div className={style.loginContainer}>
@@ -17,7 +12,7 @@ export const LoginPage = () => {
                 <AuthWithOtherSocial/>
                 <h4>-------- or --------</h4>
                 <div className={style.login}>
-                    <Login/>
+                    <InnerForm />
                 </div>
             </div>
         </div>
