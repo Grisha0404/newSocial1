@@ -1,5 +1,6 @@
 import API from "../Redux/API";
 import {AppThunk} from "../Redux/redux-store";
+import {setAppStatusAC} from "./appReducer";
 
 const initialState = {
     users: [
@@ -22,8 +23,6 @@ export const usersReducer = (state: InitialType = initialState, action: UsersAct
             return {...state, currentPage: action.page}
         case "GET-TOTAL":
             return {...state, totalCount: action.totalCount}
-        case "GET-FETCHING":
-            return {...state, fetch: action.fetch}
         default:
             return state;
     }
@@ -32,15 +31,15 @@ export const setUsersAC = (items: UsersType[]) => ({type: 'SET-USERS', items} as
 export const followAC = (follow: boolean, userId: number) => ({type: 'SET-FOLLOWS', follow, userId} as const)
 export const setSelectorAC = (page: number) => ({type: 'SET-SELECTOR', page} as const)
 export const getTotalCountAC = (totalCount: number) => ({type: 'GET-TOTAL', totalCount} as const)
-export const getFetchingAC = (fetch: boolean) => ({type: 'GET-FETCHING', fetch} as const)
 export const getUsersTC = (currentPage: number): AppThunk => async dispatch => {
+    dispatch(setAppStatusAC('loading'))
     try {
         const res = await API.usersFriends(currentPage)
         dispatch(getTotalCountAC(res.data.totalCount))
-        dispatch(getFetchingAC(true))
+        dispatch(setAppStatusAC('succeeded'))
         dispatch(setUsersAC(res.data.items))
     } catch (err) {
-        dispatch(getFetchingAC(false))
+        dispatch(setAppStatusAC('loading'))
         console.log('Error with get users ', err)
     }
 }
@@ -64,12 +63,10 @@ export type UsersActionsType =
     | FollowACType
     | SetSelectorACType
     | GetTotalCountACType
-    | GetFetchingACType
 type SetUsersACType = ReturnType<typeof setUsersAC>
 type FollowACType = ReturnType<typeof followAC>
 type SetSelectorACType = ReturnType<typeof setSelectorAC>
 type GetTotalCountACType = ReturnType<typeof getTotalCountAC>
-type GetFetchingACType = ReturnType<typeof getFetchingAC>
 export type UsersType = {
     id: number,
     name: string,
@@ -81,7 +78,7 @@ export type UsersType = {
     followed: boolean
 }
 export type InitialType = {
-    users: UsersType[],
+    users: UsersType[]
     currentPage: number,
     totalCount: number,
     fetch: boolean
