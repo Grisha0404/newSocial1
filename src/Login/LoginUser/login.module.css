@@ -2,12 +2,16 @@
     display: flex;
     height: 100vh;
     flex-wrap: wrap;
-    align-content: space-around;
+    align-content: flex-start;
     justify-content: center;
     align-items: center;
 }
-.login{
-    background: red;
+.login {
+    width: 100%;
+}
+.login input{
+    width: 70%;
+    margin: 5px;
 }
 
 .loginContainer {
