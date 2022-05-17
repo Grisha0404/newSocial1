@@ -32,19 +32,33 @@ const API = {
         const query = `/api/1.0/follow/` + id;
         return axiosInstance.delete<{}, TestType<FollowUserType>>(query);
     },
-    getStatusProfile: (id: string | undefined ) => {
+    getStatusProfile: (id: string | undefined) => {
         const query = `/api/1.0/profile/status/` + id;
         return axiosInstance.get<{}, TestType<string>>(query);
     },
     changeStatus: (status: string) => {
         const query = `/api/1.0/profile/status`;
         return axiosInstance.put<{ status: string }, TestType<string>>(query, {status});
+    },
+    logIn: (email: string, password: string, rememberMe: boolean) => {
+        const query = `/api/1.0/auth/login`;
+        return axiosInstance.post<{}, TestType<FollowUserType>>(query, {email, password, rememberMe});
+    },
+    logOut: () => {
+        const query = `/api/1.0/auth/login`;
+        return axiosInstance.delete<{}, TestType<FollowUserType>>(query);
     }
 };
 
 //Type
 type TestType<T = {}> = {
     data: T
+}
+
+export type LoginType = {
+    email: string,
+    password: string,
+    rememberMe: boolean
 }
 
 export type FollowUserType = {
