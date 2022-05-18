@@ -19,6 +19,7 @@ export const PATH = {
 }
 
 export const RoutesPage = () => {
+
     return (
         <div className={'Content'}>
             <Routes>
