@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {InfoUser} from "./InfoUser";
-import {UsersProfileType} from "../../Redux/API";
+import {StatusProfile} from "./StatusProfile/StatusProfile";
+import s from '../profile.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../Redux/redux-store";
+import {UsersProfileType} from "../../Redux/API";
 import {useParams} from "react-router-dom";
-import {StatusProfile} from "./StatusProfile/StatusProfile";
 import {getStatusProfile, getUserProfileTC} from "../../Reducer/profilePageReducer";
-import s from '../profile.module.css'
 
 export const InfoProfile = () => {
     const profile = useSelector<AppRootStateType, UsersProfileType>(state => state.profilePage.profile)
@@ -21,8 +21,10 @@ export const InfoProfile = () => {
 
     return (
         <div className={s.profileContainer}>
-            {params.id === ':id' ? 'Yo, men! Here could be your profile!' :  <InfoUser profile={profile}/>}
-            <StatusProfile/>
+            <>
+                <InfoUser profile={profile}/>
+                <StatusProfile/>
+            </>
         </div>
     );
 };
