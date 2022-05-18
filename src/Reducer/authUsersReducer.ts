@@ -1,9 +1,10 @@
 import API from "../Redux/API";
 import {AppThunk} from "../Redux/redux-store";
 import {setAppStatusAC, setErrorAC} from "./appReducer";
+import {getUserProfileTC} from "./profilePageReducer";
 
 export type DataInitialType = {
-    id: number | null,
+    id: string | null,
     login: string | null,
     email: string | null,
     isAuth: boolean
@@ -43,6 +44,8 @@ export const getLoginAuthUserTC = (): AppThunk => async dispatch => {
         const {data} = await API.authUser()
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setLoginUsersAC(data.data, true))
+        //@ts-ignore
+        dispatch(getUserProfileTC(data.data.id))
     } catch (err) {
         console.log('Error with auth login user ', err)
     }
@@ -54,9 +57,8 @@ export const loginTC = (email: string, password: string, rememberMe: boolean): A
         const {resultCode} = data
         dispatch(setAppStatusAC('succeeded'))
         resultCode === 0 ? dispatch(getLoginAuthUserTC()) : dispatch(setErrorAC('Incorrect Email or Password!'));
-    } catch (er) {
-        dispatch(setAppStatusAC('loading'))
-        console.log(er)
+    } catch (err) {
+        console.log(err)
     }
 }
 export const logOut = (): AppThunk => async dispatch => {
@@ -67,7 +69,6 @@ export const logOut = (): AppThunk => async dispatch => {
         dispatch(setAppStatusAC('succeeded'))
         resultCode === 0 && dispatch(setLoginUsersAC(initialState, false))
     } catch (err) {
-        dispatch(setAppStatusAC('loading'))
         console.log(err)
     }
 };
