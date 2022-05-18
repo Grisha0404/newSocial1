@@ -14,7 +14,6 @@ export const StatusProfile: React.FC<StatusProfileType> = (props) => {
         dispatch(changeStatusProfileAC(title))
     }
     const activeBlur = () =>{
-        debugger
         dispatch(changeStatusProfileTC(status))
     }
 
