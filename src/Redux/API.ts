@@ -18,7 +18,7 @@ const API = {
     },
     usersProfile: (id: string | undefined) => {
         const query = `/api/1.0/profile/` + id;
-        return axiosInstance.get<{}, TestType<UsersProfileType>>(query);
+        return axiosInstance.get<FollowUserType, TestType<UsersProfileType>>(query);
     },
     authUser: () => {
         const query = `/api/1.0/auth/me`;
@@ -52,6 +52,8 @@ const API = {
 
 //Type
 type TestType<T = {}> = {
+    resultCode: number
+    messages: [],
     data: T
 }
 
