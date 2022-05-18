@@ -6,10 +6,12 @@
     justify-content: center;
     align-items: center;
 }
+
 .login {
     width: 100%;
 }
-.login input{
+
+.login input {
     width: 70%;
     margin: 5px;
 }
@@ -51,6 +53,14 @@
 
 .loginUser img {
     width: 60px;
+}
+
+.loginUser button {
+    width: 60px;
+    height: 20%;
+    border: none;
+    background: none;
+    color: red;
 }
 
 .loginInfo {
