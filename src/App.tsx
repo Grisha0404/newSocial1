@@ -14,7 +14,6 @@ const App = () => {
             <NavBar/>
             <RoutesPage/>
             <ErrorSnackbar/>
-
         </div>
     );
 }
