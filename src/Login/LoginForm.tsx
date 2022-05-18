@@ -3,6 +3,7 @@ import {useFormik} from 'formik';
 import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "../Reducer/authUsersReducer";
 import {AppRootStateType} from "../Redux/redux-store";
+import {getUserProfileTC} from "../Reducer/profilePageReducer";
 
 // Shape of form values
 interface FormValues {
