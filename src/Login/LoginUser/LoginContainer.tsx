@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import style from './login.module.css'
 import {useSelector} from "react-redux";
 import {DataInitialType} from "../../Reducer/authUsersReducer";
