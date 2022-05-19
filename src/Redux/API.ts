@@ -40,9 +40,9 @@ const API = {
         const query = `/api/1.0/profile/status`;
         return axiosInstance.put<{ status: string }, TestType<string>>(query, {status});
     },
-    logIn: (email: string, password: string, rememberMe: boolean) => {
+    logIn: (data:LoginType) => {
         const query = `/api/1.0/auth/login`;
-        return axiosInstance.post<{}, TestType<FollowUserType>>(query, {email, password, rememberMe});
+        return axiosInstance.post<LoginType, TestType<{userId:string}>>(query, data);
     },
     logOut: () => {
         const query = `/api/1.0/auth/login`;
@@ -51,6 +51,7 @@ const API = {
 };
 
 //Type
+
 type TestType<T = {}> = {
     resultCode: number
     messages: [],
@@ -61,6 +62,7 @@ export type LoginType = {
     email: string,
     password: string,
     rememberMe: boolean
+    captcha?:string
 }
 
 export type FollowUserType = {
