@@ -5,7 +5,6 @@ import {Header} from "./Heder/Header";
 import {NavBar} from "./NavLink/NavLink";
 import {ErrorSnackbar} from "./Common/ErrorSnackbar";
 
-
 const App = () => {
 
     return (
