@@ -6,9 +6,9 @@ import {AppRootStateType} from "../Redux/redux-store";
 import {getUserProfileTC} from "../Reducer/profilePageReducer";
 
 // Shape of form values
-interface FormValues {
-    email: string;
-    password: string;
+type FormikErrorType = {
+    email?: string
+    password?: string
     rememberMe?: boolean
 }
 
@@ -22,15 +22,20 @@ export const InnerForm = () => {
             password: '',
             rememberMe: false
         },
-        // validate: (values: FormValues) => {
-        //     let errors: FormikErrors<FormValues> = {};
-        //     if (!values.email) {
-        //         errors.email = 'Required';
-        //     } else if (!values.email) {
-        //         errors.email = 'Invalid email address';
-        //     }
-        //     return errors;
-        // },
+        validate: (values) => {
+            const errors: FormikErrorType = {};
+            if (!values.email) {
+                errors.email = 'Required';
+            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+                errors.email = 'Invalid email address';
+            }
+            if (!values.password) {
+                errors.password = 'Required';
+            } else if (values.password.length < 3) {
+                errors.password = 'Must be 3 characters or less';
+            }
+            return errors
+        },
         onSubmit: values => {
             const {email, password, rememberMe} = values
             dispatch(loginTC(email, password, rememberMe))
@@ -41,20 +46,20 @@ export const InnerForm = () => {
     return (
         <form onSubmit={formik.handleSubmit}>
             <div>
-                <input type="email" name="email" onChange={formik.handleChange}
-                       value={formik.values.email} placeholder={'Email'}/>
-                {/*{touched.email && errors.email && <div>{errors.email}</div>}*/}
+                <input type="email" placeholder={'Email'} {...formik.getFieldProps('email')}/>
+                {formik.touched.email && formik.errors.email &&
+                    <div style={{color: 'red'}}>{formik.errors.email}</div>}
             </div>
             <div>
-                <input type="password" name="password" onChange={formik.handleChange}
-                       value={formik.values.password} placeholder={'password'}/>
-                {/*{touched.password && errors.password && <div>{errors.password}</div>}*/}
+                <input type="password" placeholder={'password'}{...formik.getFieldProps('email')}/>
+                {formik.touched.password && formik.errors.password &&
+                    <div style={{color: 'red'}}>{formik.errors.password}</div>}
             </div>
             <div>
-                <input type='checkbox' name='rememberMe' onChange={formik.handleChange} style={{width:'50px'}}/>remember me
+                <input type='checkbox' style={{width: '50px'}} {...formik.getFieldProps('rememberMe')}/>remember me
             </div>
             <button type="submit"
-                disabled={status === 'loading'} >
+                    disabled={status === 'loading'}>
                 Sign IN
             </button>
         </form>
