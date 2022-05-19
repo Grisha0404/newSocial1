@@ -3,7 +3,6 @@ import {useFormik} from 'formik';
 import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "../Reducer/authUsersReducer";
 import {AppRootStateType} from "../Redux/redux-store";
-import {getUserProfileTC} from "../Reducer/profilePageReducer";
 
 // Shape of form values
 type FormikErrorType = {
@@ -37,8 +36,7 @@ export const InnerForm = () => {
             return errors
         },
         onSubmit: values => {
-            const {email, password, rememberMe} = values
-            dispatch(loginTC(email, password, rememberMe))
+            dispatch(loginTC(values))
         }
     })
 
@@ -51,7 +49,7 @@ export const InnerForm = () => {
                     <div style={{color: 'red'}}>{formik.errors.email}</div>}
             </div>
             <div>
-                <input type="password" placeholder={'password'}{...formik.getFieldProps('email')}/>
+                <input type="password" placeholder={'password'}{...formik.getFieldProps('password')}/>
                 {formik.touched.password && formik.errors.password &&
                     <div style={{color: 'red'}}>{formik.errors.password}</div>}
             </div>
