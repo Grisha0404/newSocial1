@@ -11,12 +11,11 @@ import {getLoginAuthUserTC} from "../Reducer/authUsersReducer";
 
 export const Profile = () => {
     const isAuth = useSelector<AppRootStateType, boolean>(state => state.login.isAuth)
-    const dispatch =useDispatch()
+    const dispatch = useDispatch()
 
-    useEffect(()=>{
-
+    useEffect(() => {
         dispatch(getLoginAuthUserTC())
-    },[dispatch])
+    }, [])
 
 
     if (!isAuth) return <Navigate to={'/login'}/>
