@@ -22,7 +22,7 @@ const API = {
     },
     authUser: () => {
         const query = `/api/1.0/auth/me`;
-        return axiosInstance.get<{}, TestType<AuthUserType>>(query);
+        return axiosInstance.get<TestType<MeType>>(query);
     },
     followUsers: (id: number) => {
         const query = `/api/1.0/follow/` + id;
@@ -40,9 +40,9 @@ const API = {
         const query = `/api/1.0/profile/status`;
         return axiosInstance.put<{ status: string }, TestType<string>>(query, {status});
     },
-    logIn: (data:LoginType) => {
+    logIn: (data: LoginType) => {
         const query = `/api/1.0/auth/login`;
-        return axiosInstance.post<LoginType, TestType<{userId:string}>>(query, data);
+        return axiosInstance.post<LoginType, TestType<{ userId: string }>>(query, data);
     },
     logOut: () => {
         const query = `/api/1.0/auth/login`;
@@ -51,6 +51,11 @@ const API = {
 };
 
 //Type
+export type MeType = {
+    id: number,
+    login: string,
+    email: string,
+}
 
 type TestType<T = {}> = {
     resultCode: number
@@ -62,7 +67,7 @@ export type LoginType = {
     email: string,
     password: string,
     rememberMe: boolean
-    captcha?:string
+    captcha?: string
 }
 
 export type FollowUserType = {
