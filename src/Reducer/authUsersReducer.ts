@@ -1,40 +1,42 @@
-import API, {LoginType} from "../Redux/API";
+import API, {LoginType, MeType} from "../Redux/API";
 import {AppThunk} from "../Redux/redux-store";
 import {setAppIsInitializedAC, setAppStatusAC, setErrorAC} from "./appReducer";
 import {getUserProfileTC} from "./profilePageReducer";
 
 export type DataInitialType = {
-    id: string | null,
-    login: string | null,
-    email: string | null,
+    data: MeType,
     isAuth: boolean
 }
 
 const initialState = {
-    id: null,
-    login: null,
-    email: null,
     isAuth: false,
-}
+} as DataInitialType
 
 
 export const authUsersReducer = (state: DataInitialType = initialState, action: LoginActionsType) => {
     switch (action.type) {
         case "SET-LOGIN-USERS":
             return {...state, isAuth: action.isAuth}
+        case "GET-LOGIN-USER":
+            return {...state, data: action.data}
         default:
             return state;
     }
 };
 export type LoginActionsType =
-    setLoginUsersACType
+    setLoginUsersACType | GetLoginUserACType
 
 
 type setLoginUsersACType = ReturnType<typeof setLoginUsersAC>
+type GetLoginUserACType = ReturnType<typeof getLoginUserAC>
 
 export const setLoginUsersAC = (isAuth: boolean) => ({
     type: 'SET-LOGIN-USERS',
     isAuth
+} as const)
+export const getLoginUserAC = (data: MeType) => ({
+    type: 'GET-LOGIN-USER',
+    data
 } as const)
 
 export const getLoginAuthUserTC = (): AppThunk => async dispatch => {
@@ -43,8 +45,9 @@ export const getLoginAuthUserTC = (): AppThunk => async dispatch => {
         const {data} = await API.authUser()
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setLoginUsersAC(true))
-        //@ts-ignore
-        dispatch(getUserProfileTC(data.data.id))
+        dispatch(getLoginUserAC(data.data))
+
+        // dispatch(getUserProfileTC('22896'))
     } catch (err) {
         console.log('Error with auth login user ', err)
     }
@@ -52,7 +55,7 @@ export const getLoginAuthUserTC = (): AppThunk => async dispatch => {
 export const loginTC = (data: LoginType): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     try {
-        const res = await API.logIn(data)
+        await API.logIn(data)
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setLoginUsersAC(true))
     } catch (err) {
