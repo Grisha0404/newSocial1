@@ -4,7 +4,6 @@ import {InfoProfile} from "./InfoProfile/InfoProfile";
 import {PostsContainer} from "./PostsContainer/PostsContainer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../Redux/redux-store";
-import {LoginPage} from "../Login/LoginPage";
 import {Navigate} from "react-router-dom";
 import {getLoginAuthUserTC} from "../Reducer/authUsersReducer";
 
@@ -14,25 +13,18 @@ export const Profile = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getLoginAuthUserTC())
-    }, [])
-
-
+        if (isAuth) {
+            dispatch(getLoginAuthUserTC())
+        }
+    }, [dispatch]);
     if (!isAuth) return <Navigate to={'/login'}/>
 
     return (
-
         <div className={s.profile}>
-            {
-                isAuth ?
-                    <>
-                        <InfoProfile/>
-                        <PostsContainer/>
-                    </>
-                    :
-                    <LoginPage/>
-
-            }
+                <>
+                    <InfoProfile/>
+                    <PostsContainer/>
+                </>
         </div>
     );
 };
