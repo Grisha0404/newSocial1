@@ -49,6 +49,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: flex-end;
+    align-items: center;
 }
 
 .loginUser img {
