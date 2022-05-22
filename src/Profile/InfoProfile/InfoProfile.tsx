@@ -7,6 +7,7 @@ import {AppRootStateType} from "../../Redux/redux-store";
 import {UsersProfileType} from "../../Redux/API";
 import {useParams} from "react-router-dom";
 import {getStatusProfile, getUserProfileTC} from "../../Reducer/profilePageReducer";
+import {getLoginAuthUserTC} from "../../Reducer/authUsersReducer";
 
 export const InfoProfile = () => {
     const profile = useSelector<AppRootStateType, UsersProfileType>(state => state.profilePage.profile)
@@ -15,9 +16,10 @@ export const InfoProfile = () => {
     const params = useParams()
 
     useEffect(() => {
+        dispatch(getLoginAuthUserTC())
         dispatch(getStatusProfile(params.id))
         dispatch(getUserProfileTC(params.id))
-    }, [dispatch, params.id]);
+    }, [params.id]);
 
     return (
         <div className={s.profileContainer}>
