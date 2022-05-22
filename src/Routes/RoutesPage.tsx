@@ -7,6 +7,9 @@ import {Music} from "../Music/Music";
 import {Settings} from "../Settings/Settings";
 import {UsersContainer} from "../Users/UsersContainer";
 import {LoginPage} from "../Login/LoginPage";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../Redux/redux-store";
+import {UsersProfileType} from "../Redux/API";
 
 export const PATH = {
     PROFILE: '/profile/:id',
@@ -19,7 +22,6 @@ export const PATH = {
 }
 
 export const RoutesPage = () => {
-
     return (
         <div className={'Content'}>
             <Routes>
