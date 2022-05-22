@@ -20,13 +20,13 @@ export const LoginUser = (props: LoginUserType) => {
     return (
         props.isAuth ?
             <div className={style.loginUser}>
-                {/*<NavLink to={'/profile/' + props.authMe.id}>*/}
-                {/*    <img src={ava} alt={'Photo'}/>*/}
-                {/*</NavLink>*/}
-                {/*<div className={style.loginInfo}>*/}
-                {/*    <div>{props.authMe.login}</div>*/}
-                {/*    <div className={style.block}>{props.authMe.email}</div>*/}
-                {/*</div>*/}
+                <NavLink to={'/profile/' + props.authMe.id}>
+                    <img src={ava} alt={'Photo'}/>
+                </NavLink>
+                <div className={style.loginInfo}>
+                    <div>{props.authMe.login}</div>
+                    <div className={style.block}>{props.authMe.email}</div>
+                </div>
                 <button onClick={outChangeHandler}>LogOut</button>
             </div>
             : <div className={style.loginBlock}>
