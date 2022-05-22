@@ -1,7 +1,8 @@
 import API, {LoginType, MeType} from "../Redux/API";
 import {AppThunk} from "../Redux/redux-store";
 import {setAppIsInitializedAC, setAppStatusAC, setErrorAC} from "./appReducer";
-import {getUserProfileTC} from "./profilePageReducer";
+import {getUserProfileTC, getUsersProfileAC} from "./profilePageReducer";
+import {debounce} from "@mui/material";
 
 export type DataInitialType = {
     data: MeType,
@@ -43,11 +44,12 @@ export const getLoginAuthUserTC = (): AppThunk => async dispatch => {
     dispatch(setAppStatusAC('loading'))
     try {
         const {data} = await API.authUser()
+        const {resultCode} = data
+        resultCode === 0 &&
+        dispatch(getUserProfileTC(JSON.stringify(data.data.id)))
+        dispatch(getLoginUserAC(data.data))
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setLoginUsersAC(true))
-        dispatch(getLoginUserAC(data.data))
-
-        // dispatch(getUserProfileTC('22896'))
     } catch (err) {
         console.log('Error with auth login user ', err)
     }
@@ -65,7 +67,7 @@ export const loginTC = (data: LoginType): AppThunk => async (dispatch) => {
 export const logOut = (): AppThunk => async dispatch => {
     dispatch(setAppStatusAC('loading'))
     try {
-        const res = await API.logOut()
+        await API.logOut()
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setLoginUsersAC(false))
     } catch (err) {
